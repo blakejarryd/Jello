@@ -39,10 +39,8 @@ const Card = ({ card, handleEdit }) => {
   }
   return (
     <div>
-    {!editing && <CardDisplay card={card} edit={switchEdit}/>
-    }
-    {editing && <CardEdit card={card} handleEdit={handleEdit} switchEdit={switchEdit}/>}
-
+      {!editing && <CardDisplay card={card} edit={switchEdit}/>}
+      {editing && <CardEdit card={card} handleEdit={handleEdit} switchEdit={switchEdit}/>}
     </div>
   )
 }

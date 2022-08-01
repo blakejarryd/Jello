@@ -12,11 +12,22 @@ const App = () => {
     })
   }
 
+  const handleEdit = async (updatedCard, cardID) => {
+    console.log(cardID)
+    await fetch(`http://localhost:3000/cards/${cardID}`, {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(updatedCard)
+    })
+  }
+
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Board />} />
-        <Route path='/:id' element={<CardDetail handleDelete={handleDelete}/>} />
+        <Route path='/:id' element={<CardDetail handleDelete={handleDelete} handleEdit={handleEdit}/>} />
       </Routes>
     </div>
   );
