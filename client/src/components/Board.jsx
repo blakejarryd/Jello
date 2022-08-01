@@ -1,21 +1,25 @@
-import { useState, useEffect } from 'react';
-import Column from './Column';
+import { useState, useEffect } from 'react'
+import Column from './Column'
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Board = () => {
-  const [cards, setCards] = useState(null);
-  const [columns, setColumns] = useState(['To Do', 'Doing', 'Done']);
+  const [cards, setCards] = useState(null)
+  const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
 
   const getCards = async () => {
-    const url = 'http://localhost:3000/cards';
-    const res = await fetch(url);
-    const cardData = await res.json();
-    setCards(cardData);
-  };
+    const url = 'http://localhost:3000/cards'
+    const res = await fetch(url)
+    const cardData = await res.json()
+    setCards(cardData)
+  }
   const handleCreate = async (name, status) => {
     const res = await fetch('http://localhost:3000/cards', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ title:name, status:status })
     })
@@ -36,31 +40,23 @@ const Board = () => {
   }
 
   useEffect(() => {
-    getCards();
-  }, []);
+    getCards()
+  }, [])
 
   const columnsList = columns.map((column) => {
-    return (
-      cards && (
-        <div className="col">
-          <Column name={column} 
-            cards={cards} 
-            onFormSubmit={handleCreate} 
-            />
-        </div>
-      )
-    );
-  });
-    return (cards && <Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/>)
-  }
+    return (cards && <div className="col"><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/></div>)
+  })
 
   return (
     <div className="container">
-      <div className="row">{columnsList}</div>
+      <div className="row">
+        {columnsList}
+      </div>
     </div>
-  );
+  )
+}
 
-export default Board;
+export default Board
 
   // const columns = ['To Do', 'Doing', 'Done']
   // let cardColumns = {}
@@ -91,5 +87,4 @@ export default Board;
   //   col = createColumns()
   //   console.log(col)
   // }, [cards])
-
 
