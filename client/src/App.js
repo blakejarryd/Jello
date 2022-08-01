@@ -2,8 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css';
 import Board from './components/Board'
 import CardDetail from './components/CardDetails';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = () => {
   return (
