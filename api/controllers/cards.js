@@ -35,7 +35,7 @@ cardsRouter.put('/:cardID', async (req, res) => {
   res.status(200).json(updatedCard)
 })
 
-cardsRouter.delete('/:cardID', async (res, req) => {
+cardsRouter.delete('/:cardID', async (req, res) => {
   const deleteCard = await Card.findByIdAndRemove(req.body).exec()
   res.status(200).json(deleteCard)
 
