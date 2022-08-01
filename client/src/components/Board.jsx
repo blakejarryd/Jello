@@ -11,13 +11,24 @@ const Board = () => {
     const cardData = await res.json()
     setCards(cardData)
   }
+  const handleCreate = async (name, status) => {
+    const res = await fetch('http://localhost:3000/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title:name, status:status })
+    })
+    const newCard = await res.json()
+    setCards([...cards, newCard])
+  }
 
   useEffect(() => {
     getCards()
   }, [])
 
   const columnsList = columns.map((column) => {
-    return (cards && <Column name={column} cards={cards} />)
+    return (cards && <Column name={column} cards={cards} onFormSubmit={handleCreate} />)
   })
 
   return (
