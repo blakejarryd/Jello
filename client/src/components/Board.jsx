@@ -17,7 +17,7 @@ const Board = () => {
   }, [])
 
   const columnsList = columns.map((column) => {
-    return <Column name={column} cards={cards} />
+    return (cards && <Column name={column} cards={cards} />)
   })
 
   return (
