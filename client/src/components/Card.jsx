@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
+import Button from 'react-bootstrap/Button';
+
+
 const CardEdit = ({ card, handleEdit, switchEdit }) => {
   const [cardName, setCardName] = useState(card.title)
   const handleChange = (event) => {
@@ -27,7 +30,7 @@ const CardDisplay = ({ card, edit }) => {
     <Link to={`/${card._id}`} >
         <h5>{card.title}</h5>   
     </Link>
-    <button type="button" class="btn btn-default btn-sm" onClick={edit}>Edit</button> 
+    <Button variant="light" size="sm" onClick={edit}>Edit</Button> 
   </div>
   )
 }

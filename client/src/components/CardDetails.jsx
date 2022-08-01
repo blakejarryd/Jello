@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
+import Button from 'react-bootstrap/Button';
+
 //Component that displays read only card details - based on card param in URL
 const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
   return (
@@ -46,7 +48,7 @@ const CardDetailEdit = ({ card, handleEdit, switchEdit }) => {
         <input type="text" name="description" value={updatedCard.description} onChange={handleChange}/>
         <input type="submit" value="Save" />
       </form>
-        <button onClick={switchEdit} >Cancel</button>
+        <button onClick={switchEdit}>Cancel</button>
     </div>
   )
 }

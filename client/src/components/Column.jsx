@@ -2,6 +2,7 @@ import Card from './Card'
 import { useState, useEffect } from 'react'
 
 import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
 
 
 const CreateCard = ({ onFormSubmit, status }) => {
@@ -17,14 +18,16 @@ const CreateCard = ({ onFormSubmit, status }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        <input 
+        <Button 
+          as="input"
+          variant="outline-dark"
           type="text"
           name="title"
           value={taskName}
           onChange={handleChange}
         />
       </label>
-      <input type="submit" value="+"/>
+      <Button as="input" type="submit" variant="secondary" size="sm" value="+"/>
     </form>
   )
 }
