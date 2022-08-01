@@ -27,7 +27,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit }) => {
   let columnsCards = []
   cards.map((card) => {
     if(card.status === name) {
@@ -36,7 +36,7 @@ const Column = ({ cards, name, onFormSubmit }) => {
   })
 
   const cardsList = columnsCards.map((card) => {
-    return <Card card={card} />
+    return <Card card={card} handleEdit={handleEdit}/>
   })
 
   return (
