@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import Column from './Column'
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 const Board = () => {
   const [cards, setCards] = useState(null)
   const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
@@ -40,12 +44,14 @@ const Board = () => {
   }, [])
 
   const columnsList = columns.map((column) => {
-    return (cards && <Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/>)
+    return (cards && <div className="col"><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/></div>)
   })
 
   return (
-    <div>
-      {columnsList}
+    <div className="container">
+      <div className="row">
+        {columnsList}
+      </div>
     </div>
   )
 }
@@ -81,5 +87,4 @@ export default Board
   //   col = createColumns()
   //   console.log(col)
   // }, [cards])
-
 

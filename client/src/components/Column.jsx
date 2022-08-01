@@ -1,6 +1,8 @@
 import Card from './Card'
 import { useState, useEffect } from 'react'
 
+import Container from 'react-bootstrap/Container'
+
 
 const CreateCard = ({ onFormSubmit, status }) => {
   const [taskName, setTaskName] = useState("")
@@ -40,11 +42,11 @@ const Column = ({ cards, name, onFormSubmit, handleEdit }) => {
   })
 
   return (
-    <div>
-      <h3>{name}</h3>
-      {cardsList}
-      <CreateCard onFormSubmit={onFormSubmit} status={name} />
-    </div>
+      <div>
+        <h3>{name}</h3>
+        {cardsList}
+        <CreateCard onFormSubmit={onFormSubmit} status={name} />
+      </div>
   )
 }
 
