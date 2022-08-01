@@ -13,6 +13,7 @@ cardsRouter.get('/', async (req, res) => {
 })
 
 cardsRouter.get('/:cardID', async (req, res) => {
+  console.log(req.params)
   const card = await Card.findById(req.params.cardID).exec()
   // delete after testing
   console.log(card)
