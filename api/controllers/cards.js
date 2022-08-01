@@ -1,7 +1,7 @@
 const express = require('express')
 
 const cardsRouter = express.Router()
-const Holiday = require('../models/cards')
+const Card = require('../models/cards')
 
 cardsRouter.get('/', async (req, res) => {
   const cards = await Card.find({}).exec()
