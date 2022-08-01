@@ -1,7 +1,7 @@
 import Card from './Card'
 const createCard = () => {
   return (
-    
+    <h1></h1>
   )
 }
 
