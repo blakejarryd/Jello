@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
-const CardDetail = () => {
+const CardDetail = ({ handleDelete }) => {
   const [card, setCard] = useState(null)
   const { id } = useParams()
 
@@ -25,6 +25,9 @@ return (
       <p>{card.description}</p>
       <Link to={'./edit'}>
         <button>Edit</button>
+      </Link>
+      <Link to={'/'}>
+        <button onClick={() => handleDelete(card._id)}>Delete</button>
       </Link>
       <Link to='/'>
         <button>Cancel</button>
