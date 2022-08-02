@@ -1,0 +1,10 @@
+[
+  {
+    "name":"Jello",
+    "description":"Board to manage the Jello app build"
+  },
+  {
+    "name":"Sales Team",
+    "description":"Board to manage sales"
+  }
+]
