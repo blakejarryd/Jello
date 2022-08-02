@@ -18,7 +18,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        <Button 
+        <input 
           as="input"
           variant="outline-dark"
           type="text"
