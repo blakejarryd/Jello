@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const Board = () => {
+const Board = ({ board }) => {
   const [cards, setCards] = useState(null)
   const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
 
@@ -13,7 +13,9 @@ const Board = () => {
     const url = 'http://localhost:3000/cards'
     const res = await fetch(url)
     const cardData = await res.json()
-    setCards(cardData)
+    let boardCards = cardData.filter((card) => board.cards.includes(card._id))
+    console.log(boardCards)  
+    setCards(boardCards)
   }
   const handleCreate = async (name, status) => {
     const res = await fetch('http://localhost:3000/cards', {
@@ -41,18 +43,19 @@ const Board = () => {
 
   useEffect(() => {
     getCards()
-  }, [])
+  }, [board])
 
   const columnsList = columns.map((column) => {
-    return (cards && <div className="col"><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/></div>)
+    return (cards && <Col><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/></Col>)
   })
 
   return (
-    <div className="container">
-      <div className="row">
+    <Container>
+      <h1>{board.name}</h1>
+      <Row>
         {columnsList}
-      </div>
-    </div>
+      </Row>
+    </Container>
   )
 }
 

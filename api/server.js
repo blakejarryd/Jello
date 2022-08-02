@@ -7,7 +7,7 @@ const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
 
-
+const boardsController = require("./controllers/boards")
 const cardsController = require("./controllers/cards")
 
 const whitelist = ['http://localhost:3001']
@@ -24,7 +24,9 @@ app.use(cors({
 
 app.use(express.json())
 
+app.use("/boards", boardsController)
 app.use("/cards", cardsController)
+
 
 mongoose.connect(dbURL, () => {
   console.log("connected to jello db")
