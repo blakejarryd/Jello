@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import './App.css';
 
 import Home from "./components/Home"
@@ -14,8 +14,21 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const App = () => {
+  const [authorised, setAuthorised] = useState(null)
   const [boards, setBoards] = useState(null)
   const [board, setBoard] = useState('')
+
+  const navigate = useNavigate()
+
+  const handleAuth = (authed) => {
+    setAuthorised(authed)
+    navigate("/")
+  }
+
+  const handleLogout = () => {
+    setAuthorised(null)
+    navigate("/")
+  }
 
   const getBoards = async () => {
     const url = 'http://localhost:3000/boards'
@@ -87,6 +100,17 @@ const App = () => {
     setBoards(updatedboards)
   }
 
+  // code for protected route
+  // useEffect(() => {
+  //   const checkIfLoggedIn = async () => {
+  //     const res = await fetch("/users/isauthorised")
+  //     const data = await res.json()
+  //     console.log(data.msg)
+  //     setAuthorised(data.authorised)
+  //   }
+  //   checkIfLoggedIn()
+  // }, [])
+
   useEffect(() => {
     getBoards()
   }, [])
@@ -94,10 +118,10 @@ const App = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/" element={<Home authorised={authorised} />} />
+        <Route path="/login" element={<Login handleLogin={handleAuth} />} />
+        <Route path="/register" element={<Register handleRegister={handleAuth} />} />
+        <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
         <Route path='/boards' element={
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
