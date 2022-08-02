@@ -55,13 +55,25 @@ const Board = ({ board, setBoard }) => {
     // This needs to be changed to a findByIDAndUpdate instead of fetching, cause its slow
     getCards()
   }
+  const handleDrop = async (cardID, updatedColumn) => {
+    console.log(cardID, updatedColumn)
+    await fetch(`http://localhost:3000/cards/${cardID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({status: updatedColumn})
+    })
+
+    getCards()
+  }
 
   useEffect(() => {
     getCards()
   }, [board])
 
   const columnsList = columns.map((column) => {
-    return (cards && <Col><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit}/></Col>)
+    return (cards && <Col><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop}/></Col>)
   })
 
   return (

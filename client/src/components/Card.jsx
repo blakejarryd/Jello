@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useDrag, useDrop } from 'react-dnd'
+
 
 import Button from 'react-bootstrap/Button';
 
@@ -48,8 +50,16 @@ const Card = ({ card, handleEdit }) => {
   const switchEdit = () => {
     setEditing(!editing)
   }
+  const [{isDragging}, drag] = useDrag(() => ({
+    type: "card",
+    item: {id: card._id},
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
+
   return (
-    <div>
+    <div ref={drag}>
       {!editing && <CardDisplay card={card} edit={switchEdit}/>}
       {editing && <CardEdit card={card} handleEdit={handleEdit} switchEdit={switchEdit}/>}
     </div>
