@@ -19,7 +19,9 @@ const CardEdit = ({ card, handleEdit, switchEdit }) => {
   <div className='card'>
     <form onSubmit={submit}>
       <input type="text" name="title" value={cardName} onChange={handleChange}/>
-      <input type="submit" value="Save" />
+      <Button type="submit" variant="light" size="sm" className="edit-button">
+      <i className="bi bi-save" style={{ fontSize: 15 }}></i>
+      </Button>
     </form>
   </div>
   )
@@ -27,10 +29,16 @@ const CardEdit = ({ card, handleEdit, switchEdit }) => {
 const CardDisplay = ({ card, edit }) => {
   return (
   <div className='card'>
-    <Link to={`/${card._id}`} >
-        <h5>{card.title}</h5>   
-    </Link>
-    <Button variant="light" size="sm" onClick={edit}>Edit</Button> 
+    <div className="card-name">
+      <Link to={`/${card._id}`} >
+          <h5>{card.title}</h5>   
+      </Link>
+    </div>
+    <div>
+      <Button variant="light" size="sm" onClick={edit} className="edit-button">
+        <i className="bi bi-pen" style={{ fontSize: 15 }}></i>
+      </Button> 
+    </div>
   </div>
   )
 }
