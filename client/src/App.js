@@ -7,6 +7,9 @@ import Board from './components/Board'
 import CardDetail from './components/CardDetails';
 import NavBar from './components/NavBar';
 
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 const App = () => {
   const [boards, setBoards] = useState(null)
   const [board, setBoard] = useState('')
@@ -48,7 +51,9 @@ const App = () => {
         <Route path='/boards' element={
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} /> }
-            {board && <Board board={board} /> }
+            <DndProvider backend={HTML5Backend}>
+              {board && <Board board={board} /> }
+            </DndProvider>
           </>
         } />
         <Route path='/:id' element={<CardDetail handleDelete={handleDelete} handleEdit={handleEdit}/>} />
