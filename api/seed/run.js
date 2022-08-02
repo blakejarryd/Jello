@@ -35,7 +35,8 @@ mongoose.connect(dbURL, async () => {
   })
   console.log(cardIds)
   //insert cards IDs to Jello Board
-  const boards = await Board.updateMany({}, {$set: {"cards": cardIds}})
+  const boards = await Board.findOneAndUpdate({}, {$set: {"cards": cardIds}})
   console.log(boards)
   mongoose.connection.close()
 })
+
