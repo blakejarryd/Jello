@@ -58,6 +58,19 @@ const App = () => {
     })
   }
 
+  const createBoard = async () => {
+    const res = await fetch('http://localhost:3000/boards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: new Date().valueOf()})
+    })
+    const newBoard = await res.json()
+    setBoard(newBoard)
+    setBoards([...boards, newBoard])
+  }
+
   useEffect(() => {
     getBoards()
   }, [])
@@ -71,7 +84,7 @@ const App = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path='/boards' element={
           <>
-            {boards && <NavBar boards={boards} setBoard={setBoard} /> }
+            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
               {board && <Board board={board} setBoard={setBoard}/> }
             </DndProvider>

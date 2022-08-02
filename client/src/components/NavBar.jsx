@@ -5,8 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom'
 
 
-const NavBar = ({ boards, setBoard }) => {
-
+const NavBar = ({ boards, setBoard, createBoard }) => {
 
   const boardDropdown = boards.map((board) => {
     return <NavDropdown.Item onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
@@ -20,7 +19,7 @@ const NavBar = ({ boards, setBoard }) => {
       <NavDropdown title="Boards" id="basic-nav-dropdown">
         {boardDropdown}
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.1">New Board</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => createBoard()}>New Board</NavDropdown.Item>
       </NavDropdown>
         <Nav.Link as={Link} to="/user">User</Nav.Link>
       </Nav>
