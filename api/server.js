@@ -8,11 +8,11 @@ const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
-const MongoDbStore = mongoDBSession(session)
-const sessionStore = new MongoDBStore({
-  uri: dbURL,
-  collection: "sessions"
-})
+// const MongoDbStore = mongoDBSession(session)
+// const sessionStore = new MongoDBStore({
+//   uri: dbURL,
+//   collection: "sessions"
+// })
 
 const userController = require('./controllers/users')
 const boardsController = require("./controllers/boards")

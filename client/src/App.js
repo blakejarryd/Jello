@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css';
 
 import Home from "./components/Home"
+import Login from './components/Login'
+import Register from './components/Register'
+import Logout from './components/Logout'
 import Board from './components/Board'
 import CardDetail from './components/CardDetails';
 import NavBar from './components/NavBar';
@@ -44,7 +47,7 @@ const App = () => {
     getBoards()
   }, [])
 
-  return (
+return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
