@@ -48,7 +48,6 @@ const App = () => {
   }
 
   const handleEdit = async (updatedCard, cardID) => {
-    console.log(updatedCard)
     await fetch(`http://localhost:3000/cards/${cardID}`, {
       method: 'PUT', 
       headers: {
@@ -64,11 +63,28 @@ const App = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name: new Date().valueOf()})
+      body: JSON.stringify({ name: "New Board"})
     })
     const newBoard = await res.json()
     setBoard(newBoard)
     setBoards([...boards, newBoard])
+  }
+
+  const editBoard = async (board) => {
+    console.log(board)
+    const res = await fetch(`http://localhost:3000/boards/${board._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(board)
+    })
+    const updatedBoard = await res.json()
+    setBoard(updatedBoard)
+    let updatedboards = [...boards] 
+    const updateIndex = updatedboards.findIndex((e) => e._id === updatedBoard._id)
+    updatedboards[updateIndex] = updatedBoard
+    setBoards(updatedboards)
   }
 
   useEffect(() => {
@@ -86,7 +102,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard}/> }
+              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard}/> }
             </DndProvider>
           </>
         } />

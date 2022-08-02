@@ -40,7 +40,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop }) => {
     }
   })
   const cardsList = columnsCards.map((card) => {
-    return <Card card={card} handleEdit={handleEdit}/>
+    return <Card key={card._id} card={card} handleEdit={handleEdit}/>
   })
 
   const [{isOver}, drop] = useDrop (() => ({
