@@ -9,24 +9,26 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
   return (
     <div>
       <h1>{card.title}</h1>
-      <h4>Description</h4>
+      <h5>Description</h5>
       <p>{card.description}</p>
-      <button onClick={switchEdit}>Edit</button>
+      <p>Status: {card.status}</p>
+      <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
       <Link to={'/'}>
-        <button onClick={() => handleDelete(card._id)}>Delete</button>
+        <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
       </Link>
       <Link to='/'>
-        <button>Cancel</button>
+        <Button variant="light" size="sm"> Cancel</Button>
       </Link>
     </div>
   )
 }
 
 //Edit form for card
-const CardDetailEdit = ({ card, handleEdit, switchEdit }) => {
+const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
   const initialState = {
     title: card.title,
-    description: card.description
+    description: card.description,
+    status: card.status
   }
   const [updatedCard, setUpdatedCard] = useState(initialState)
   const handleChange = (event) => {
@@ -36,19 +38,37 @@ const CardDetailEdit = ({ card, handleEdit, switchEdit }) => {
     }
     setUpdatedCard(newUpdate)
   }
+
   const submit = (event) => {
     event.preventDefault()
-    handleEdit(updatedCard, card._id)
-    switchEdit()
+    submitEdit(updatedCard)
   }
+ 
   return (
     <div>
       <form onSubmit={submit}>
-        <input type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
-        <input type="text" name="description" value={updatedCard.description} onChange={handleChange}/>
-        <input type="submit" value="Save" />
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
+        </div>
+        <div class="input-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
+        </div>
+        {/* TODO: Update this to use the board specific columns */}
+        <div class="form-group">
+          <label for="Status">Status</label>
+          <br/>
+          <select class="form-control" name="status" onChange={handleChange}>
+            <option selected>{updatedCard.status}</option>
+            <option value="To Do">To Do</option>
+            <option value="Doing">Doing</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+        <Button type="submit" size="sm">Save</Button>
+        <Button variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
       </form>
-        <button onClick={switchEdit}>Cancel</button>
     </div>
   )
 }
@@ -60,6 +80,12 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
 
   const switchEdit = () => {
     setEditing(!editing)
+  }
+
+  const submitEdit = (updatedCard) => {
+    handleEdit(updatedCard, card._id)
+    setCard(updatedCard)
+    switchEdit()
   }
 
   const getCard = async (id) => {
@@ -76,7 +102,7 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
 return (
   <>
     {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} />}
-    {card && editing && < CardDetailEdit card={card} handleEdit={handleEdit} switchEdit={switchEdit} />}
+    {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} />}
   </>
   )
 }

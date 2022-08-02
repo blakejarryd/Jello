@@ -13,7 +13,7 @@ const App = () => {
   }
 
   const handleEdit = async (updatedCard, cardID) => {
-    console.log(cardID)
+    console.log(updatedCard)
     await fetch(`http://localhost:3000/cards/${cardID}`, {
       method: 'PUT', 
       headers: {
