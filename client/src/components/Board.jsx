@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react'
+import React from 'react'
 import Column from './Column'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
-const Board = ({ board, setBoard }) => {
+const Board = ({ board, setBoard, editBoard }) => {
   const [cards, setCards] = useState(null)
   const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
+  const [editing, setEditing] = useState(false)
+ 
+
+  const switchEdit = () => {
+    setEditing(!editing)
+  }
 
   const getCards = async () => {
     const url = 'http://localhost:3000/cards'
@@ -73,12 +81,47 @@ const Board = ({ board, setBoard }) => {
   }, [board])
 
   const columnsList = columns.map((column) => {
-    return (cards && <Col><Column name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop}/></Col>)
+    return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop}/></Col>)
   })
+
+
+
+  const BoardName = () => {
+    return (
+      <h1 className = "m-2" onClick={switchEdit}>{board.name}</h1>
+    )
+  }
+
+  const BoardNameEdit = () => {
+    const [boardName, setBoardName] = useState(board.name)
+
+    const handleChange = (event) => {
+      setBoardName(event.target.value)
+    }
+    const submit = (event) => {
+      event.preventDefault()
+      editBoard({
+        ...board,
+        name: boardName
+      })
+      switchEdit()
+    }
+    return (
+      <form onSubmit={submit} className="m-3 d-flex align-content-center">
+        <input className="p-1 fs-2"type="text" name="title" value={boardName} onChange={handleChange}/>
+        <Button className="m-1"type="submit" variant="primary" size="lg">
+         <i className="bi bi-arrow-return-right"></i>
+        </Button>
+      </form>
+    )
+  }
 
   return (
     <Container>
-      <h1>{board.name}</h1>
+      <div>
+      {!editing && <BoardName key="BoardName"/> }
+       {editing && <BoardNameEdit key="BoardNameEdit"/> }
+      </div>
       <Row>
         {columnsList}
       </Row>
@@ -87,34 +130,4 @@ const Board = ({ board, setBoard }) => {
 }
 
 export default Board
-
-  // const columns = ['To Do', 'Doing', 'Done']
-  // let cardColumns = {}
-
-  // const populateColumns = () => {
-  //   for (let i = 0; i < columns.length; i++) {
-  //     let Columnlist = []
-  //     cards.map((card) => {
-  //       if(card.status === columns[i]) {
-  //         Columnlist.push(card)
-  //       }
-  //     })
-  //     cardColumns[columns[i]] = Columnlist
-  //     console.log(cardColumns)
-  //   }
-  // }
-
-  // const createColumns = () => {
-  //   let columns = []
-  //   for (let status in cardColumns) {
-  //     columns.push(<Column cards={cardColumns[status]} />)
-  //   }
-  //   return columns
-  // }
-
-   // useEffect(() => {
-  //   cards && populateColumns()
-  //   col = createColumns()
-  //   console.log(col)
-  // }, [cards])
 

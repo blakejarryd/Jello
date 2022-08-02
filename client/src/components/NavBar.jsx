@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 const NavBar = ({ boards, setBoard, createBoard }) => {
 
   const boardDropdown = boards.map((board) => {
-    return <NavDropdown.Item onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
+    return <NavDropdown.Item key={board.name} onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
   })
 
   return (
