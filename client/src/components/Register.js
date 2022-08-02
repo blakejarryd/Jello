@@ -21,7 +21,7 @@ const Register = (props) => {
     const data = await res.json()
     console.log(data)
   }
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <h1>Register</h1>
