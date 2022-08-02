@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css';
+
+import Home from "./components/Home"
 import Board from './components/Board'
 import CardDetail from './components/CardDetails';
 import NavBar from './components/NavBar';
@@ -42,7 +44,8 @@ const App = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={
+        <Route path="/" element={<Home />} />
+        <Route path='/boards' element={
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} /> }
             {board && <Board board={board} /> }
