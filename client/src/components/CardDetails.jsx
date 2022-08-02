@@ -13,10 +13,10 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
       <p>{card.description}</p>
       <p>Status: {card.status}</p>
       <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
-      <Link to={'/'}>
+      <Link to={'/boards'}>
         <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
       </Link>
-      <Link to='/'>
+      <Link to='/boards'>
         <Button variant="light" size="sm"> Cancel</Button>
       </Link>
     </div>

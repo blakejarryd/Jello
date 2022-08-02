@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const Board = ({ board }) => {
+const Board = ({ board, setBoard }) => {
   const [cards, setCards] = useState(null)
   const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
 
@@ -14,9 +14,19 @@ const Board = ({ board }) => {
     const res = await fetch(url)
     const cardData = await res.json()
     let boardCards = cardData.filter((card) => board.cards.includes(card._id))
-    console.log(boardCards)  
     setCards(boardCards)
   }
+
+  const addNewCardToBoard = async (card, board) => {
+    await fetch(`http://localhost:3000/boards/${board._id}`, {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify({cards: [...board.cards, card._id]})
+    })
+  }
+
   const handleCreate = async (name, status) => {
     const res = await fetch('http://localhost:3000/cards', {
       method: 'POST',
@@ -27,6 +37,11 @@ const Board = ({ board }) => {
     })
     const newCard = await res.json()
     setCards([...cards, newCard])
+    setBoard({
+      ...board,
+      cards: [...board.cards, newCard._id]
+      })
+    addNewCardToBoard(newCard, board)
   }
   const handleEdit = async (cardName, cardID) => {
     console.log(cardID)
