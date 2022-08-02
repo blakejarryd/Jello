@@ -13,7 +13,7 @@ const Register = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const res = await fetch("/users/register", {
+    const res = await fetch("http://localhost:3000/users/register", {
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify(fields)
@@ -21,7 +21,7 @@ const Register = (props) => {
     const data = await res.json()
     console.log(data)
   }
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <h1>Register</h1>
