@@ -21,12 +21,27 @@ const App = () => {
     setBoards(boardData)
   }
 
+  const deleteCardFromBoard = async (cardID, board) => {
+    const boardCards = [...board.cards]
+    const updatedCards = boardCards.pop(cardID)
+    console.log(boardCards)
+    console.log(updatedCards)
+    await fetch(`http://localhost:3000/boards/${board._id}`, {
+      method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify({cards: boardCards})
+    })
+  }
+
   const handleDelete = async (id) => {
     console.log(id)
     const url = `http://localhost:3000/cards/${id}`
     await fetch(url, {
       method: 'DELETE'
     })
+    deleteCardFromBoard(id, board)
   }
 
   const handleEdit = async (updatedCard, cardID) => {
@@ -52,7 +67,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} /> }
+              {board && <Board board={board} setBoard={setBoard}/> }
             </DndProvider>
           </>
         } />
