@@ -27,7 +27,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
           onChange={handleChange}
         />
       </label>
-      <Button as="input" type="submit" variant="secondary" size="sm" value="+"/>
+      <Button as="input" type="submit" variant="secondary" className="add-button" size="sm" value="+"/>
     </form>
   )
 }
