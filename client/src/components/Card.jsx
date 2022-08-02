@@ -59,7 +59,7 @@ const Card = ({ card, handleEdit }) => {
   }));
 
   return (
-    <div ref={drag}>
+    <div ref={drag} style={{opacity: isDragging ? 0 : 1}}>
       {!editing && <CardDisplay card={card} edit={switchEdit}/>}
       {editing && <CardEdit card={card} handleEdit={handleEdit} switchEdit={switchEdit}/>}
     </div>
