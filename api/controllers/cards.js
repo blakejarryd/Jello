@@ -1,6 +1,4 @@
 const express = require('express')
-const mongoose = require('mongoose')
-
 
 const cardsRouter = express.Router()
 const Card = require('../models/cards')
