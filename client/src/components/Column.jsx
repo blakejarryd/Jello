@@ -1,6 +1,6 @@
 import Card from './Card'
 import { useState, useEffect } from 'react'
-
+import { useDrop } from 'react-dnd'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -32,20 +32,27 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop }) => {
   let columnsCards = []
   cards.map((card) => {
     if(card.status === name) {
       columnsCards.push(card)
     }
   })
-
   const cardsList = columnsCards.map((card) => {
     return <Card card={card} handleEdit={handleEdit}/>
   })
 
+  const [{isOver}, drop] = useDrop (() => ({
+    accept: "card",
+    drop: (item) => changeColumn(item.id)
+  }))
+
+  const changeColumn = (cardID) => {
+    onDrop(cardID, name)
+  }
   return (
-      <div>
+      <div ref={drop}>
         <h3>{name}</h3>
         {cardsList}
         <CreateCard onFormSubmit={onFormSubmit} status={name} />
