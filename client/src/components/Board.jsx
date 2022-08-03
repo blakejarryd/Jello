@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, handleDeleteBoard }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -41,6 +41,8 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
   }
 
   const handleCreate = async (name, status) => {
+    console.log(name)
+    console.log(status)
     const res = await fetch('http://localhost:3000/cards', {
       method: 'POST',
       headers: {
@@ -121,7 +123,20 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
   }, [board])
 
   const columnsList = board.columns.map((column) => {
-    return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus} handleDragEnd={handleDragEnd}/></Col>)
+    return (cards && 
+      <Col><Column 
+        key={column}
+        name={column} 
+        cards={cards[column]} 
+        onFormSubmit={handleCreate} 
+        handleEdit={handleEdit} 
+        onDrop={handleDrop} 
+        board={board} 
+        editBoard={editBoard} 
+        editCardsStatus={editCardsStatus} 
+        handleDragEnd={handleDragEnd}
+        handleDeleteBoard={handleDeleteBoard}
+        /></Col>)
   })
 
   const BoardName = () => {

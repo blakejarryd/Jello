@@ -34,7 +34,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, handleDeleteBoard }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
@@ -94,17 +94,23 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
   }
 
   return (
-    cards && <div>
+    cards && 
+    <div className="column">
+      <div className="col-header">
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-        <Droppable droppableId={name}>
-          {(provided) => (
-            <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
-              {cardsList}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+      <Button className='btn-sm trash' type="submit" variant="secondary">
+      <i className="bi bi-trash"></i>
+      </Button>
+      </div>
+      <Droppable droppableId={name}>
+        {(provided) => (
+          <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+            {cardsList}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <CreateCard onFormSubmit={onFormSubmit} status={name}/>
     </div>
   )

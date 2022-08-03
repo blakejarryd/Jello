@@ -24,6 +24,13 @@
   cursor: pointer
 }
 
+.column {
+  padding: 10px;
+  border: 2px solid darkgray;
+  border-radius: 15px;
+  box-shadow: 5px;
+}
+
 .columntitle {
   display:inline-block; 
 }
@@ -32,4 +39,14 @@
   font-style: italic;
   color: grey;
   cursor: pointer
+}
+
+.col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trash {
+  max-height: 35px;
 }

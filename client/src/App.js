@@ -124,6 +124,15 @@ const App = () => {
     editBoard(updatedBoard)
   }
 
+
+  const handleDeleteBoard = async (id) => {
+    console.log(id)
+    const url = `http://localhost:3000/cards/${id}`
+    await fetch(url, {
+      method: 'DELETE'
+    })
+  }
+
   // code for protected route
   // useEffect(() => {
   //   const checkIfLoggedIn = async () => {
@@ -150,7 +159,14 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
+              {board && <Board 
+                board={board} 
+                setBoard={setBoard} 
+                editBoard={editBoard} 
+                editCardsStatus={editCardsStatus} 
+                createColumn={createColumn}
+                handleDeleteBoard={handleDeleteBoard}
+                /> }
             </DndProvider>
           </>
         } />
