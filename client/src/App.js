@@ -127,13 +127,15 @@ const App = () => {
   }
 
 
-  const deleteColumn = (columns) => {
-    console.log(columns)
-    // const updatedBoard = {
-    //   ...board,
-    //   columns: [...board.columns, "New Column"]
-    // }
-    // editBoard(updatedBoard)
+  const deleteColumn = (columnName) => {
+    console.log(columnName)
+    let columns = [...board.columns]
+    let updatedColumns = columns.filter((e) => e != columnName)
+    const updatedBoard = {
+      ...board,
+      columns: updatedColumns
+    }
+    editBoard(updatedBoard)
   }
 
   // code for protected route
