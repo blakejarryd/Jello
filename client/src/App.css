@@ -1,3 +1,7 @@
+div.container.home {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
 
 .edit-button {
   position: absolute;
