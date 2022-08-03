@@ -127,12 +127,13 @@ const App = () => {
   }
 
 
-  const handleDeleteBoard = async (id) => {
-    console.log(id)
-    const url = `http://localhost:3000/cards/${id}`
-    await fetch(url, {
-      method: 'DELETE'
-    })
+  const deleteColumn = (columns) => {
+    console.log(columns)
+    // const updatedBoard = {
+    //   ...board,
+    //   columns: [...board.columns, "New Column"]
+    // }
+    // editBoard(updatedBoard)
   }
 
   // code for protected route
@@ -177,7 +178,7 @@ const App = () => {
                   editBoard={editBoard} 
                   editCardsStatus={editCardsStatus} 
                   createColumn={createColumn}
-                  handleDeleteBoard={handleDeleteBoard}
+                  deleteColumn={deleteColumn}
                   /> }
               </ProtectedRoute>
             </DndProvider>

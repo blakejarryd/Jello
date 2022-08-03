@@ -29,12 +29,12 @@ const CreateCard = ({ onFormSubmit, status }) => {
           onChange={handleChange}
         />
       </label>
-      <Button as="input" type="submit" variant="secondary" className="add-button" size="sm" value="+"/>
+      <Button as="input" type="submit" variant="secondary" className="add-button new-card" size="sm" value="+"/>
     </form>
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, handleDeleteBoard }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, deleteColumn }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
@@ -99,7 +99,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
       <div className="col-header">
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-      <Button className='btn-sm trash' type="submit" variant="secondary">
+      <Button onClick={() => deleteColumn()} className='btn-sm trash' type="submit" variant="secondary">
       <i className="bi bi-trash"></i>
       </Button>
       </div>

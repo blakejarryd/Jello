@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, handleDeleteBoard }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, deleteColumn }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -135,7 +135,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
         editBoard={editBoard} 
         editCardsStatus={editCardsStatus} 
         handleDragEnd={handleDragEnd}
-        handleDeleteBoard={handleDeleteBoard}
+        deleteColumn={deleteColumn}
         /></Col>)
   })
 
@@ -177,7 +177,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
         <Col>
-          <Button onClick={createColumn}>New Column</Button>
+          <Button className="new-column" Click={createColumn}>New Column</Button>
         </Col>
       </DragDropContext>
       </Row>

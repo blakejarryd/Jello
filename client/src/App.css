@@ -33,7 +33,9 @@ div.container {
 }
 
 .boardtitle {
-  display:inline-block; 
+  display:inline-block;
+  color: #2368A2; 
+  margin-bottom: 20px;
 }
 
 .boardtitle:hover {
@@ -44,9 +46,12 @@ div.container {
 
 .column {
   padding: 10px;
+  background-color: #fbe7e9;
   border: 2px solid darkgray;
   border-radius: 15px;
-  box-shadow: 5px;
+  box-shadow: 0 5px 10px #931621;
+  margin-bottom: 30px;
+  max-width: 300px;
 }
 
 .columntitle {
@@ -63,8 +68,42 @@ div.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #1B4971;
+}
+
+
+.card {
+  margin: 5px;
+  padding: 10px;
+  background-color: #F0F2F4;
+  border-radius: 10px;
+  min-height: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button {
+  background-color: #F0F2F4;
+  border: none;
+}
+
+.card-name a {
+  text-decoration: none;
+  color: darkslategray;
+}
+
+.card-name h5 {
+  font-size: 18px;
+}
+
+.new-column, .new-card {
+  background-color: #931621;
+  border: none;
 }
 
 .trash {
   max-height: 35px;
+  margin-right: 5px;
+  background-color: #931621;;
+  border: none
 }
