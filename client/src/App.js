@@ -119,9 +119,16 @@ const App = () => {
   }
 
   const createColumn = () => {
+    const ogName = "New Column"
+    let i = 1
+    let newName = ogName
+    while (board.columns.includes(newName)) {
+      newName =  ogName + ' ' + i
+      i++
+    }
     const updatedBoard = {
       ...board,
-      columns: [...board.columns, "New Column"]
+      columns: [...board.columns, newName]
     }
     editBoard(updatedBoard)
   }

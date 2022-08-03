@@ -67,7 +67,15 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
       event.preventDefault()
       let columnsArray = [...board.columns]
       const replaceIndex = columnsArray.indexOf(name)
-      columnsArray[replaceIndex] = columnName
+      //check for existing column name
+      const ogName = columnName
+      let i = 1
+      let newName = ogName
+      while (board.columns.includes(newName)) {
+        newName =  ogName + ' ' + i
+        i++
+      }
+      columnsArray[replaceIndex] = newName
       editBoard({
         ...board,
         columns: columnsArray
