@@ -162,7 +162,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
     return (
       <form onSubmit={submit} className="m-3 d-flex align-content-center">
         <input className="p-1 fs-2"type="text" name="title" value={boardName} onChange={handleChange}/>
-        <Button className="m-1"type="submit" variant="primary" size="lg">
+        <Button className="m-1"type="submit" variant="secondary" size="lg">
          <i className="bi bi-arrow-return-right"></i>
         </Button>
       </form>
@@ -177,7 +177,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
         <Col>
-          <Button className="new-column" Click={createColumn}>New Column</Button>
+          <Button className="new-column" onClick={createColumn}>New Column</Button>
         </Col>
       </DragDropContext>
       </Row>

@@ -99,7 +99,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
       <div className="col-header">
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-      <Button onClick={() => deleteColumn()} className='btn-sm trash' type="submit" variant="secondary">
+      <Button onClick={() => deleteColumn(name)} className='btn-sm trash' type="submit" variant="secondary">
       <i className="bi bi-trash"></i>
       </Button>
       </div>
