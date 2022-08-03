@@ -57,8 +57,8 @@ mongoose.connect(dbURL, async () => {
   })
   console.log(cardIds)
 
-  //insert user IDs to Jello Board
-  const users = await User.findOneAndUpdate({}, {$set: {"boards": boardIds}})
+  //insert board IDs onto user doc
+  const users = await User.findOneAndUpdate({username:"Admin"}, {$set: {"boards": boardIds}})
   console.log(users)
 
   mongoose.connection.close()
