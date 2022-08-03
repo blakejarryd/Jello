@@ -9,10 +9,8 @@ import Button from 'react-bootstrap/Button';
 
 const Board = ({ board, setBoard, editBoard }) => {
   const [cards, setCards] = useState(null)
-  const [columns, setColumns] = useState(['To Do', 'Doing', 'Done'])
   const [editing, setEditing] = useState(false)
  
-
   const switchEdit = () => {
     setEditing(!editing)
   }
@@ -80,11 +78,9 @@ const Board = ({ board, setBoard, editBoard }) => {
     getCards()
   }, [board])
 
-  const columnsList = columns.map((column) => {
-    return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop}/></Col>)
+  const columnsList = board.columns.map((column) => {
+    return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard}/></Col>)
   })
-
-
 
   const BoardName = () => {
     return (

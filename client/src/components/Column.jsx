@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 
 const CreateCard = ({ onFormSubmit, status }) => {
   const [taskName, setTaskName] = useState("")
+
   const handleChange = (event) => {
     setTaskName(event.target.value)
   }
@@ -32,7 +33,13 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard }) => {
+  const [editing, setEditing] = useState(false)
+ 
+  const switchEdit = () => {
+    setEditing(!editing)
+  }
+  
   let columnsCards = []
   cards.map((card) => {
     if(card.status === name) {
@@ -51,9 +58,44 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop }) => {
   const changeColumn = (cardID) => {
     onDrop(cardID, name)
   }
+
+  const ColumnName = () => {
+    return (
+      <h3 className = "m-2 columntitle" onClick={switchEdit}>{name}</h3>
+    )
+  }
+
+  const ColumnNameEdit = () => {
+    const [columnName, setColumnName] = useState(name)
+
+    const handleChange = (event) => {
+      setColumnName(event.target.value)
+    }
+    const submit = (event) => {
+      event.preventDefault()
+      let columnsArray = [...board.columns]
+      const replaceIndex = columnsArray.indexOf(name)
+      columnsArray[replaceIndex] = columnName
+      editBoard({
+        ...board,
+        columns: columnsArray
+      })
+      switchEdit()
+    }
+    return (
+      <form onSubmit={submit} className="m-1 d-flex align-content-center">
+        <input  className="fs-5" type="text" name="title" value={columnName} onChange={handleChange}/>
+        <Button className="m-1"type="submit" variant="primary" size="sm">
+         <i className="bi bi-arrow-return-right"></i>
+        </Button>
+      </form>
+    )
+  }
+
   return (
       <div ref={drop}>
-        <h3>{name}</h3>
+        {!editing && <ColumnName key="BoardName"/> }
+        {editing && <ColumnNameEdit key="BoardNameEdit"/> }
         {cardsList}
         <CreateCard onFormSubmit={onFormSubmit} status={name} />
       </div>
