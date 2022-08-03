@@ -117,7 +117,11 @@ const App = () => {
   }
 
   const createColumn = () => {
-    console.log('hi')
+    const updatedBoard = {
+      ...board,
+      columns: [...board.columns, "New Column"]
+    }
+    editBoard(updatedBoard)
   }
 
   // code for protected route
