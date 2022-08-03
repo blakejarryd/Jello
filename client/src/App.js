@@ -116,6 +116,14 @@ const App = () => {
     console.log(updatedCards)
   }
 
+  const createColumn = () => {
+    const updatedBoard = {
+      ...board,
+      columns: [...board.columns, "New Column"]
+    }
+    editBoard(updatedBoard)
+  }
+
   // code for protected route
   // useEffect(() => {
   //   const checkIfLoggedIn = async () => {
@@ -142,7 +150,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus}/> }
+              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
             </DndProvider>
           </>
         } />
