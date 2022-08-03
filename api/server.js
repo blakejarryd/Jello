@@ -2,36 +2,46 @@ require("dotenv").config()
 const express = require("express")
 const session = require("express-session")
 const mongoose = require("mongoose")
-const mongoDbSession = require("connect-mongodb-session")
+const mongoDBSession = require("connect-mongodb-session")
 const cors = require('cors')
 
 const app = express()
 const PORT = process.env.PORT
 const dbURL = process.env.MONGODB_URL
-// const MongoDbStore = mongoDBSession(session)
-// const sessionStore = new MongoDBStore({
-//   uri: dbURL,
-//   collection: "sessions"
-// })
+const MongoDBStore = mongoDBSession(session)
+const sessionStore = new MongoDBStore({
+  uri: dbURL,
+  collection: "sessions"
+})
 
 const userController = require('./controllers/users')
 const boardsController = require("./controllers/boards")
 const cardsController = require("./controllers/cards")
 
-const whitelist = ['http://localhost:3001']
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: sessionStore,
+  cookie: {
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  }
+}))
+
+const allowlist = ['http://localhost:3001']
 app.use(cors({
   origin: (origin, cb) => {
-    console.log(origin)
-    if (whitelist.indexOf(origin) !== -1) {
+    console.log({origin})
+    if (allowlist.indexOf(origin) !== -1) {
       cb(null, true)
     } else {
-      cb(new Error())
+      cb(new Error("origin not allowed"))
     }
   }
 }))
 
 app.use(express.json())
-
+app.use("/users", userController)
 app.use("/boards", boardsController)
 app.use("/cards", cardsController)
 

@@ -6,12 +6,14 @@ const User = require('../models/users')
 const userRouter = express.Router()
 
 userRouter.post('/register', async (req, res) => {
+
   req.body.password = bcrypt.hashSync(
     req.body.password,
     bcrypt.genSaltSync()
   )
 
-  const user = await User.create(req.body)
+try {
+  const user = await User.create({ username: req.body.username, password: req.body.password })
   req.session.currentUser = user
   res.status(200).json({
     msg: "You have successfully registered",
@@ -22,5 +24,37 @@ userRouter.post('/register', async (req, res) => {
       username: user.username
     }
   })
- })
+} catch (e) {
+  console.log("Error")
+  res.status(400).json({
+    msg: "Username already exists"
+  })
+}
+})
+
+userRouter.post('/login', async (req, res) => {
+  const { username, password } = req.body
+  const user = await User.findOne({ username: username }).exec()
+
+  if (!user) {
+    return res.status(400).json({
+      msg: "Username or password is incorrect"
+    })
+  }
+
+  const passwordIsCorrect = bcrypt.compareSync(password, user.password)
+
+  if (!passwordIsCorrect) {
+    return res.status(400).json({
+      msg: "Username or password is incorrect"
+    })
+  } else {
+    req.session.currentUser = user
+    res.status(200).json({
+      msg: "You have logged in successfully",
+      authorised: true
+    })
+  }
+})
+
 module.exports = userRouter
