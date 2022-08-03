@@ -49,7 +49,10 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
       body: JSON.stringify({ title:name, status:status })
     })
     const newCard = await res.json()
-    setCards([...cards, newCard])
+    setCards({
+      ...cards,
+      newCard
+    })
     setBoard({
       ...board,
       cards: [...board.cards, newCard._id]
