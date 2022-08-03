@@ -41,35 +41,38 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
     setEditing(!editing)
   }
   
-  let columnsCards = []
-  cards.map((card) => {
-    if(card.status === name) {
-      columnsCards.push(card)
-    }
-  })
-  const [listOfCards, setListOfCards] = useState(columnsCards)
+  // let columnsCards = []
+  // cards.map((card) => {
+  //   if(card.status === name) {
+  //     columnsCards.push(card)
+  //   }
+  // })
+  // useEffect(() => {
+  //   columnsCards = []
+  //   cards.map((card) => {
+  //     if(card.status === name) {
+  //       columnsCards.push(card)
+  //     }
+  //   })
+  //   setListOfCards(columnsCards)
+  // }, [cards])
+
+  const [listOfCards, setListOfCards] = useState(cards)
 
   const handleInsideDragEnd = (result) => {
-    console.log(result)
+    if (!result.destination) {
+      return;
+    }
     const items = Array.from(listOfCards)
     const [reorderedItem] = items.splice(result.source.index, 1)
     items.splice(result.destination.index, 0, reorderedItem)
-    
     setListOfCards(items)
+    handleDrag(result)
   }
 
   const cardsList = listOfCards.map((card, index) => {
     return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
   })
-
-  const [{isOver}, drop] = useDrop (() => ({
-    accept: "card",
-    drop: (item) => changeColumn(item.id)
-  }))
-
-  const changeColumn = (cardID) => {
-    onDrop(cardID, name)
-  }
 
   const ColumnName = () => {
     return (
@@ -115,7 +118,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
   }
 
   return (
-    <div ref={drop}>
+    <div>
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
       <DragDropContext onDragEnd={handleInsideDragEnd}>
@@ -128,7 +131,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
           )}
         </Droppable>
       </DragDropContext>
-      <CreateCard onFormSubmit={onFormSubmit} status={name} />
+      <CreateCard onFormSubmit={onFormSubmit} status={name}/>
     </div>
   )
 }

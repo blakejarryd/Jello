@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
- 
+
   const switchEdit = () => {
     setEditing(!editing)
   }
@@ -20,7 +20,13 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
     const res = await fetch(url)
     const cardData = await res.json()
     let boardCards = cardData.filter((card) => board.cards.includes(card._id))
-    setCards(boardCards)
+    let columns = {}
+    for (let i=0; i < board.columns.length; i++) {
+      columns[board.columns[i]] = []
+      columns[board.columns[i]] = boardCards.filter((card) => board.columns[i]===card.status)
+    }
+    console.log(columns)
+    setCards(columns)
   }
 
   const addNewCardToBoard = async (card, board) => {
@@ -73,12 +79,16 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
 
     getCards()
   }
+  const handleDrag = (result, listOfCards) => {
+    console.log(result)
+  }
 
   useEffect(() => {
     getCards()
   }, [board])
 
   const columnsList = board.columns.map((column) => {
+
     return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus}/></Col>)
   })
 
