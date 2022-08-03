@@ -34,39 +34,16 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard, editCardsStatus }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDrag }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
     setEditing(!editing)
   }
-  
-  // let columnsCards = []
-  // cards.map((card) => {
-  //   if(card.status === name) {
-  //     columnsCards.push(card)
-  //   }
-  // })
-  // useEffect(() => {
-  //   columnsCards = []
-  //   cards.map((card) => {
-  //     if(card.status === name) {
-  //       columnsCards.push(card)
-  //     }
-  //   })
-  //   setListOfCards(columnsCards)
-  // }, [cards])
 
   const [listOfCards, setListOfCards] = useState(cards)
 
-  const handleInsideDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
-    const items = Array.from(listOfCards)
-    const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedItem)
-    setListOfCards(items)
+  const onDragEnd = (result) => {
     handleDrag(result)
   }
 
@@ -96,16 +73,6 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
         columns: columnsArray
       })
       switchEdit()
-      console.log(cards)
-      //update cards with new column ("status") name
-      const cardsToUpdate = []
-      cards.map((e) => {
-        if (e.status === name) {
-          cardsToUpdate.push(e._id)
-        }
-      })
-      console.log(cardsToUpdate)
-      editCardsStatus(cardsToUpdate, columnName)
     }
     return (
       <form onSubmit={submit} className="m-1 d-flex align-content-center">
@@ -121,7 +88,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
     <div>
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-      <DragDropContext onDragEnd={handleInsideDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='cards'>
           {(provided) => (
             <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
