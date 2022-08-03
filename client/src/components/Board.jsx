@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
   const [cards, setCards] = useState(null)
@@ -80,14 +81,25 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
     getCards()
   }
   const handleDragEnd = (result) => {
+    console.log(result)
     if (!result.destination) {
       return;
     }
-    const items = Array.from(listOfCards)
-    const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedItem)
-    setListOfCards(items)
-    handleDrag(result)
+    if (result.destination.index === result.source.index && result.destination.index === result.source.index) {
+      return;
+    }
+    const start = result.source.droppableId
+    const end = result.destination.droppableId
+    console.log('this', start, end)
+    if (start === end) {
+      const items = Array.from(cards[start])
+      const [reorderedItem] = items.splice(result.source.index, 1)
+      items.splice(result.destination.index, 0, reorderedItem)
+      let newCards = cards
+      newCards[start] = items
+      console.log(newCards)
+      setCards(newCards)
+    }
   }
 
   useEffect(() => {
@@ -95,7 +107,6 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
   }, [board])
 
   const columnsList = board.columns.map((column) => {
-
     return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus} handleDragEnd={handleDragEnd}/></Col>)
   })
 
@@ -134,7 +145,10 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
       <Row>
+      <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
+      </DragDropContext>
+
       </Row>
     </Container>
   )
