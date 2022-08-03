@@ -6,15 +6,11 @@ const Card = require('../models/cards')
 cardsRouter.get('/', async (req, res) => {
   const cards = await Card.find({}).exec()
   // delete after testing
-  console.log(cards)
   res.status(200).json(cards)
 })
 
 cardsRouter.get('/:cardID', async (req, res) => {
-  console.log(req.params)
   const card = await Card.findById(req.params.cardID).exec()
-  // delete after testing
-  console.log(card)
   res.status(200).json(card)
 })
 
@@ -24,7 +20,6 @@ cardsRouter.post('/', async (req, res) => {
     res.status(200).json(newCard)
   } catch (err) {
     // This may error log during dev, delete at deployment
-    console.log(err)
     console.log('OOPS')
   }
 })
@@ -32,6 +27,16 @@ cardsRouter.post('/', async (req, res) => {
 cardsRouter.put('/:cardID', async (req, res) => {
   const updatedCard = await Card.findByIdAndUpdate(req.params.cardID, req.body, { new: true }).exec()
   res.status(200).json(updatedCard)
+})
+
+//update many cards
+cardsRouter.put('/', async (req, res) => {
+  try {
+    const updatedCard = await Card.updateMany({_id: {$in: req.body.cards }}, {$set: {"status": req.body.status}}, { new: true }).exec()
+    res.status(200).json(updatedCard)
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 cardsRouter.delete('/:cardID', async (req, res) => {
