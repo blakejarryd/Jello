@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, updateBoardOrder }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -110,6 +110,16 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
       setCards(newCards)
       handleDrop(result.draggableId, result.destination.droppableId)
     }
+    let allcards = []
+    for (let stuff in cards) {
+      for (let i=0; i < stuff.length; i++) {
+        if (cards[stuff][i]) {
+          allcards.push(cards[stuff][i]._id)
+        }
+      }
+    }
+    updateBoardOrder(allcards)
+
   }
 
 

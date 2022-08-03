@@ -123,6 +123,13 @@ const App = () => {
     }
     editBoard(updatedBoard)
   }
+  const updateBoardOrder = (newOrder) => {
+    const updatedBoard = {
+      ...board,
+      cards: newOrder
+    }
+    editBoard(updatedBoard)
+  }
 
   // code for protected route
   // useEffect(() => {
@@ -150,7 +157,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
+              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn} updateBoardOrder={updateBoardOrder}/> }
             </DndProvider>
           </>
         } />
