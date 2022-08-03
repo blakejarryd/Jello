@@ -57,4 +57,12 @@ userRouter.post('/login', async (req, res) => {
   }
 })
 
+userRouter.post('/logout', async (req, res) => {
+  req.session.destroy(() => {
+    res.status(200).json({
+      msg: "User logged out"
+    })
+  })
+})
+
 module.exports = userRouter
