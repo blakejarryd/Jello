@@ -19,7 +19,7 @@ const NavBar = ({ boards, setBoard, createBoard }) => {
       <NavDropdown title="Boards" id="basic-nav-dropdown">
         {boardDropdown}
         <NavDropdown.Divider />
-        <NavDropdown.Item onClick={() => createBoard()}>New Board</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => createBoard()}>Create New Board</NavDropdown.Item>
       </NavDropdown>
         <Nav.Link as={Link} to="/user">User</Nav.Link>
       </Nav>

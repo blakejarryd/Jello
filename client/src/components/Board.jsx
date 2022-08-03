@@ -88,7 +88,7 @@ const Board = ({ board, setBoard, editBoard }) => {
 
   const BoardName = () => {
     return (
-      <h1 className = "m-2" onClick={switchEdit}>{board.name}</h1>
+      <h1 className = "m-2 boardtitle" onClick={switchEdit}>{board.name}</h1>
     )
   }
 
@@ -118,10 +118,8 @@ const Board = ({ board, setBoard, editBoard }) => {
 
   return (
     <Container>
-      <div>
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
-      </div>
       <Row>
         {columnsList}
       </Row>
