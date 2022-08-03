@@ -100,6 +100,22 @@ const App = () => {
     setBoards(updatedboards)
   }
 
+  const editCardsStatus = async (cardsToUpdate, status) => {
+    const body = {
+      cards: cardsToUpdate,
+      status: status
+    }
+    const res = await fetch(`http://localhost:3000/cards`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    const updatedCards = await res.json()
+    console.log(updatedCards)
+  }
+
   // code for protected route
   // useEffect(() => {
   //   const checkIfLoggedIn = async () => {
@@ -126,7 +142,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard}/> }
+              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus}/> }
             </DndProvider>
           </>
         } />

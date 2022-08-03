@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-const Board = ({ board, setBoard, editBoard }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
  
@@ -79,7 +79,7 @@ const Board = ({ board, setBoard, editBoard }) => {
   }, [board])
 
   const columnsList = board.columns.map((column) => {
-    return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard}/></Col>)
+    return (cards && <Col><Column key={column}name={column} cards={cards} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus}/></Col>)
   })
 
   const BoardName = () => {

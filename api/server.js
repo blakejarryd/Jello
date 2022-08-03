@@ -31,7 +31,6 @@ app.use(session({
 const allowlist = ['http://localhost:3001']
 app.use(cors({
   origin: (origin, cb) => {
-    console.log({origin})
     if (allowlist.indexOf(origin) !== -1) {
       cb(null, true)
     } else {

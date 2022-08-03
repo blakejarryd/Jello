@@ -1,6 +1,7 @@
 import Card from './Card'
 import { useState, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -33,9 +34,9 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard, editCardsStatus }) => {
   const [editing, setEditing] = useState(false)
- 
+
   const switchEdit = () => {
     setEditing(!editing)
   }
@@ -46,8 +47,19 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
       columnsCards.push(card)
     }
   })
-  const cardsList = columnsCards.map((card) => {
-    return <Card key={card._id} card={card} handleEdit={handleEdit}/>
+  const [listOfCards, setListOfCards] = useState(columnsCards)
+
+  const handleInsideDragEnd = (result) => {
+    console.log(result)
+    const items = Array.from(listOfCards)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedItem)
+    
+    setListOfCards(items)
+  }
+
+  const cardsList = listOfCards.map((card, index) => {
+    return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
   })
 
   const [{isOver}, drop] = useDrop (() => ({
@@ -81,6 +93,16 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
         columns: columnsArray
       })
       switchEdit()
+      console.log(cards)
+      //update cards with new column ("status") name
+      const cardsToUpdate = []
+      cards.map((e) => {
+        if (e.status === name) {
+          cardsToUpdate.push(e._id)
+        }
+      })
+      console.log(cardsToUpdate)
+      editCardsStatus(cardsToUpdate, columnName)
     }
     return (
       <form onSubmit={submit} className="m-1 d-flex align-content-center">
@@ -93,12 +115,21 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
   }
 
   return (
-      <div ref={drop}>
-        {!editing && <ColumnName key="BoardName"/> }
-        {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-        {cardsList}
-        <CreateCard onFormSubmit={onFormSubmit} status={name} />
-      </div>
+    <div ref={drop}>
+      {!editing && <ColumnName key="BoardName"/> }
+      {editing && <ColumnNameEdit key="BoardNameEdit"/> }
+      <DragDropContext onDragEnd={handleInsideDragEnd}>
+        <Droppable droppableId='cards'>
+          {(provided) => (
+            <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+              {cardsList}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <CreateCard onFormSubmit={onFormSubmit} status={name} />
+    </div>
   )
 }
 
