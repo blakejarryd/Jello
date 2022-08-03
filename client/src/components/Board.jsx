@@ -79,16 +79,15 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
 
     getCards()
   }
-  const handleDragEnd = (result) => {
-    if (!result.destination) {
-      return;
-    }
-    const items = Array.from(listOfCards)
-    const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedItem)
-    setListOfCards(items)
-    handleDrag(result)
-  }
+  // const handleDragEnd = (result) => {
+  //   if (!result.destination) {
+  //     return;
+  //   }
+  //   const items = Array.from(listOfCards)
+  //   const [reorderedItem] = items.splice(result.source.index, 1)
+  //   items.splice(result.destination.index, 0, reorderedItem)
+  //   handleDrag(result)
+  // }
 
   useEffect(() => {
     getCards()
@@ -96,7 +95,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
 
   const columnsList = board.columns.map((column) => {
 
-    return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus} handleDragEnd={handleDragEnd}/></Col>)
+    return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus}/></Col>)
   })
 
   const BoardName = () => {
