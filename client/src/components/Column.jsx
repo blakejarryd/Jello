@@ -34,7 +34,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDrag, editCardsStatus }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
@@ -42,7 +42,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
   }
 
   const onDragEnd = (result) => {
-    handleDrag(result)
+    handleDragEnd(result)
   }
 
 
@@ -97,8 +97,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
     cards && <div>
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='cards'>
+        <Droppable droppableId={name}>
           {(provided) => (
             <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
               {cardsList}
@@ -106,7 +105,6 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
             </div>
           )}
         </Droppable>
-      </DragDropContext>
       <CreateCard onFormSubmit={onFormSubmit} status={name}/>
     </div>
   )
