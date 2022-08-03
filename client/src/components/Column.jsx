@@ -1,6 +1,7 @@
 import Card from './Card'
 import { useState, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -46,8 +47,8 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
       columnsCards.push(card)
     }
   })
-  const cardsList = columnsCards.map((card) => {
-    return <Card key={card._id} card={card} handleEdit={handleEdit}/>
+  const cardsList = columnsCards.map((card, index) => {
+    return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
   })
 
   const [{isOver}, drop] = useDrop (() => ({
@@ -93,12 +94,20 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
   }
 
   return (
-      <div ref={drop}>
-        {!editing && <ColumnName key="BoardName"/> }
-        {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-        {cardsList}
-        <CreateCard onFormSubmit={onFormSubmit} status={name} />
-      </div>
+    <div ref={drop}>
+      {!editing && <ColumnName key="BoardName"/> }
+      {editing && <ColumnNameEdit key="BoardNameEdit"/> }
+      <DragDropContext>
+        <Droppable droppableId='cards'>
+          {(provided) => (
+            <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+              {cardsList}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+      <CreateCard onFormSubmit={onFormSubmit} status={name} />
+    </div>
   )
 }
 
