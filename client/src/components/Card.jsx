@@ -37,11 +37,9 @@ const CardDisplay = ({ card, edit }) => {
               <h5>{card.title}</h5>   
           </Link>
         </div>
-        <div>
           <Button variant="light" size="sm" onClick={edit} className="edit-button">
             <i className="bi bi-pen" style={{ fontSize: 15 }}></i>
           </Button> 
-        </div>
       </div>
   )
 }

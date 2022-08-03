@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, deleteColumn }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -41,6 +41,8 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
   }
 
   const handleCreate = async (name, status) => {
+    console.log(name)
+    console.log(status)
     const res = await fetch('/cards', {
       method: 'POST',
       headers: {
@@ -121,7 +123,20 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
   }, [board])
 
   const columnsList = board.columns.map((column) => {
-    return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus} handleDragEnd={handleDragEnd}/></Col>)
+    return (cards && 
+      <Col><Column 
+        key={column}
+        name={column} 
+        cards={cards[column]} 
+        onFormSubmit={handleCreate} 
+        handleEdit={handleEdit} 
+        onDrop={handleDrop} 
+        board={board} 
+        editBoard={editBoard} 
+        editCardsStatus={editCardsStatus} 
+        handleDragEnd={handleDragEnd}
+        deleteColumn={deleteColumn}
+        /></Col>)
   })
 
   const BoardName = () => {
@@ -147,7 +162,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
     return (
       <form onSubmit={submit} className="m-3 d-flex align-content-center">
         <input className="p-1 fs-2"type="text" name="title" value={boardName} onChange={handleChange}/>
-        <Button className="m-1"type="submit" variant="primary" size="lg">
+        <Button className="m-1"type="submit" variant="secondary" size="lg">
          <i className="bi bi-arrow-return-right"></i>
         </Button>
       </form>
@@ -162,7 +177,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) =>
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
         <Col>
-          <Button onClick={createColumn}>New Column</Button>
+          <Button className="new-column" onClick={createColumn}>New Column</Button>
         </Col>
       </DragDropContext>
       </Row>
