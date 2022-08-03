@@ -19,14 +19,14 @@ const CardEdit = ({ card, handleEdit, switchEdit }) => {
     switchEdit()
   }
   return (
-        <div className='card'>
-          <form onSubmit={submit}>
-            <input type="text" name="title" value={cardName} onChange={handleChange}/>
-            <Button type="submit" variant="light" size="sm" className="edit-button">
-            <i className="bi bi-save" style={{ fontSize: 15 }}></i>
-            </Button>
-          </form>
-        </div>
+    <div className='card'>
+      <form onSubmit={submit}>
+        <input type="text" name="title" value={cardName} onChange={handleChange}/>
+        <Button type="submit" variant="light" size="sm" className="edit-button">
+        <i className="bi bi-save" style={{ fontSize: 15 }}></i>
+        </Button>
+      </form>
+    </div>
   )
 }
 const CardDisplay = ({ card, edit }) => {
