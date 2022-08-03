@@ -1,6 +1,20 @@
-div.container.home {
-  padding-top: 30px;
-  padding-bottom: 30px;
+body {
+  color: #253237;
+  background-color: #E8EBF7;
+}
+
+div.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav-img {
+  padding: 10px;
+  max-height: 60px;
+}
+
+.colour-nav {
+  background-color: #D29DCC;
 }
 
 .edit-button {

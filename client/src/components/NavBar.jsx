@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom'
+import Image from "react-bootstrap/Image"
 
 
 const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
@@ -12,8 +13,9 @@ const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
   })
 
   return (
-    <Navbar bg="primary" variant="dark">
+    <Navbar className="colour-nav">
     <Container>
+      <img className="nav-img" src="jello.png" />
       <Navbar.Brand as={Link} to="/" >Jello</Navbar.Brand>
       <Nav className="me-auto">
       
