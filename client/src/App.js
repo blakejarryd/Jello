@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+
 import './App.css';
 
 import Home from "./components/Home"
@@ -9,6 +10,7 @@ import Logout from './components/Logout'
 import Board from './components/Board'
 import CardDetail from './components/CardDetails';
 import NavBar from './components/NavBar';
+import ProtectedRoute from './components/ProtectedRoute'
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -26,12 +28,12 @@ const App = () => {
   }
 
   const handleLogout = () => {
-    setAuthorised(null)
+    setAuthorised(false)
     navigate("/")
   }
 
   const getBoards = async () => {
-    const url = 'http://localhost:3000/boards'
+    const url = '/boards'
     const res = await fetch(url)
     const boardData = await res.json()
     setBoards(boardData)
@@ -42,7 +44,7 @@ const App = () => {
     const updatedCards = boardCards.pop(cardID)
     console.log(boardCards)
     console.log(updatedCards)
-    await fetch(`http://localhost:3000/boards/${board._id}`, {
+    await fetch(`/boards/${board._id}`, {
       method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
@@ -53,7 +55,7 @@ const App = () => {
 
   const handleDelete = async (id) => {
     console.log(id)
-    const url = `http://localhost:3000/cards/${id}`
+    const url = `/cards/${id}`
     await fetch(url, {
       method: 'DELETE'
     })
@@ -61,7 +63,7 @@ const App = () => {
   }
 
   const handleEdit = async (updatedCard, cardID) => {
-    await fetch(`http://localhost:3000/cards/${cardID}`, {
+    await fetch(`/cards/${cardID}`, {
       method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
@@ -71,7 +73,7 @@ const App = () => {
   }
 
   const createBoard = async () => {
-    const res = await fetch('http://localhost:3000/boards', {
+    const res = await fetch('/boards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -85,7 +87,7 @@ const App = () => {
 
   const editBoard = async (board) => {
     console.log(board)
-    const res = await fetch(`http://localhost:3000/boards/${board._id}`, {
+    const res = await fetch(`/boards/${board._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -105,7 +107,7 @@ const App = () => {
       cards: cardsToUpdate,
       status: status
     }
-    const res = await fetch(`http://localhost:3000/cards`, {
+    const res = await fetch(`/cards`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -132,15 +134,15 @@ const App = () => {
   }
 
   // code for protected route
-  // useEffect(() => {
-  //   const checkIfLoggedIn = async () => {
-  //     const res = await fetch("/users/isauthorised")
-  //     const data = await res.json()
-  //     console.log(data.msg)
-  //     setAuthorised(data.authorised)
-  //   }
-  //   checkIfLoggedIn()
-  // }, [])
+  useEffect(() => {
+    const checkIfLoggedIn = async () => {
+      const res = await fetch("/users/isauthorised")
+      const data = await res.json()
+      console.log(data.msg)
+      setAuthorised(data.authorised)
+    }
+    checkIfLoggedIn()
+  }, [])
 
   useEffect(() => {
     getBoards()
@@ -153,14 +155,18 @@ const App = () => {
         <Route path="/login" element={<Login handleLogin={handleAuth} />} />
         <Route path="/register" element={<Register handleRegister={handleAuth} />} />
         <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
+        
         <Route path='/boards' element={
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn} updateBoardOrder={updateBoardOrder}/> }
+              <ProtectedRoute authorised={authorised}>  
+                {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
+              </ProtectedRoute>
             </DndProvider>
           </>
         } />
+
         <Route path='/:id' element={<CardDetail handleDelete={handleDelete} handleEdit={handleEdit}/>} />
       </Routes>
     </div>
