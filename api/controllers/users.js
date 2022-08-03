@@ -65,4 +65,18 @@ userRouter.post('/logout', async (req, res) => {
   })
 })
 
+userRouter.get("/isauthorised", async (req, res) => {
+  if (req.session.currentUser) {
+    return res.status(200).json({
+      msg: "User is logged in",
+      authorised: true
+    })
+  } else {
+    return res.status(200).json({
+      msg: "User is logged out",
+      authorised: false
+    })
+  }
+})
+
 module.exports = userRouter

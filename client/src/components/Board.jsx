@@ -17,7 +17,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
   }
 
   const getCards = async () => {
-    const url = 'http://localhost:3000/cards'
+    const url = '/cards'
     const res = await fetch(url)
     const cardData = await res.json()
     let boardCards = cardData.filter((card) => board.cards.includes(card._id))
@@ -31,7 +31,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
   }
 
   const addNewCardToBoard = async (card, board) => {
-    await fetch(`http://localhost:3000/boards/${board._id}`, {
+    await fetch(`/boards/${board._id}`, {
       method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
   const handleCreate = async (name, status) => {
     console.log(name)
     console.log(status)
-    const res = await fetch('http://localhost:3000/cards', {
+    const res = await fetch('/cards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
   }
   const handleEdit = async (cardName, cardID) => {
     console.log(cardID)
-    await fetch(`http://localhost:3000/cards/${cardID}`, {
+    await fetch(`/cards/${cardID}`, {
       method: 'PUT', 
       headers: {
         'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, hand
   }
   const handleDrop = async (cardID, updatedColumn) => {
     console.log(cardID, updatedColumn)
-    await fetch(`http://localhost:3000/cards/${cardID}`, {
+    await fetch(`/cards/${cardID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

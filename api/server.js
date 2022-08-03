@@ -3,7 +3,6 @@ const express = require("express")
 const session = require("express-session")
 const mongoose = require("mongoose")
 const mongoDBSession = require("connect-mongodb-session")
-const cors = require('cors')
 
 const app = express()
 const PORT = process.env.PORT
@@ -25,17 +24,6 @@ app.use(session({
   store: sessionStore,
   cookie: {
     maxAge: 7 * 24 * 60 * 60 * 1000
-  }
-}))
-
-const allowlist = ['http://localhost:3001']
-app.use(cors({
-  origin: (origin, cb) => {
-    if (allowlist.indexOf(origin) !== -1) {
-      cb(null, true)
-    } else {
-      cb(new Error("origin not allowed"))
-    }
   }
 }))
 
