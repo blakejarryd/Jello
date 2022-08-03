@@ -151,6 +151,7 @@ const App = () => {
         
         <Route path='/boards' element={
           <>
+            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
 
               <ProtectedRoute authorised={authorised}>  
