@@ -23,3 +23,13 @@
   color: grey;
   cursor: pointer
 }
+
+.columntitle {
+  display:inline-block; 
+}
+
+.columntitle:hover {
+  font-style: italic;
+  color: grey;
+  cursor: pointer
+}
