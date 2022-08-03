@@ -34,22 +34,22 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
     setEditing(!editing)
   }
 
-  const [listOfCards, setListOfCards] = useState(cards)
-
   const onDragEnd = (result) => {
     handleDragEnd(result)
   }
 
-  const cardsList = listOfCards.map((card, index) => {
-    return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
-  })
+
+    const cardsList = cards ? cards.map((card, index) => {
+      return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
+    }) : <Card />
+ 
 
   const ColumnName = () => {
     return (
@@ -72,7 +72,16 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
         ...board,
         columns: columnsArray
       })
-      switchEdit()
+      switchEdit() 
+      //update cards with new column ("status") name
+      const cardsToUpdate = []
+      cards.map((e) => {
+        if (e.status === name) {
+          cardsToUpdate.push(e._id)
+        }
+      })
+      console.log(cardsToUpdate)
+      editCardsStatus(cardsToUpdate, columnName)
     }
     return (
       <form onSubmit={submit} className="m-1 d-flex align-content-center">
@@ -85,7 +94,7 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
   }
 
   return (
-    <div>
+    cards && <div>
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
         <Droppable droppableId={name}>

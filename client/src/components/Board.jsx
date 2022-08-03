@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -49,7 +49,10 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
       body: JSON.stringify({ title:name, status:status })
     })
     const newCard = await res.json()
-    setCards([...cards, newCard])
+    setCards({
+      ...cards,
+      newCard
+    })
     setBoard({
       ...board,
       cards: [...board.cards, newCard._id]
@@ -112,6 +115,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
     }
   }
 
+
   useEffect(() => {
     getCards()
   }, [board])
@@ -157,9 +161,12 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
       <Row>
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
+        <Col>
+          <Button onClick={createColumn}>New Column</Button>
+        </Col>
       </DragDropContext>
-
       </Row>
+      
     </Container>
   )
 }

@@ -118,6 +118,14 @@ const App = () => {
     console.log(updatedCards)
   }
 
+  const createColumn = () => {
+    const updatedBoard = {
+      ...board,
+      columns: [...board.columns, "New Column"]
+    }
+    editBoard(updatedBoard)
+  }
+
   // code for protected route
   useEffect(() => {
     const checkIfLoggedIn = async () => {
@@ -144,9 +152,11 @@ const App = () => {
         <Route path='/boards' element={
           <>
             <DndProvider backend={HTML5Backend}>
+
               <ProtectedRoute authorised={authorised}>  
-                {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus}/> }
+                {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
               </ProtectedRoute>
+
             </DndProvider>
           </>
         } />
