@@ -97,8 +97,18 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus }) => {
       items.splice(result.destination.index, 0, reorderedItem)
       let newCards = cards
       newCards[start] = items
-      console.log(newCards)
+      console.log(newCards, 'newCards')
       setCards(newCards)
+    } else {
+      const oldItems = Array.from(cards[start])
+      const [reorderedItem] = oldItems.splice(result.source.index, 1)
+      const newItems = Array.from(cards[end])
+      newItems.splice(result.destination.index, 0, reorderedItem)
+      let newCards = cards
+      newCards[start] = oldItems
+      newCards[end] = newItems
+      setCards(newCards)
+      handleDrop(result.draggableId, result.destination.droppableId)
     }
   }
 
