@@ -33,7 +33,7 @@ const CreateCard = ({ onFormSubmit, status }) => {
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoard, editCardsStatus }) => {
   const [editing, setEditing] = useState(false)
  
   const switchEdit = () => {
@@ -81,6 +81,16 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, onDrop, board, editBoar
         columns: columnsArray
       })
       switchEdit()
+      console.log(cards)
+      //update cards with new column ("status") name
+      const cardsToUpdate = []
+      cards.map((e) => {
+        if (e.status === name) {
+          cardsToUpdate.push(e._id)
+        }
+      })
+      console.log(cardsToUpdate)
+      editCardsStatus(cardsToUpdate, columnName)
     }
     return (
       <form onSubmit={submit} className="m-1 d-flex align-content-center">
