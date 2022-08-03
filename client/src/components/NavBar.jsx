@@ -9,7 +9,7 @@ import Image from "react-bootstrap/Image"
 const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
 
   const boardDropdown = boards.map((board) => {
-    return <NavDropdown.Item key={board.name} onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
+    return <NavDropdown.Item key={board.name} as={Link} to="/boards" onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
   })
 
   return (
@@ -22,7 +22,7 @@ const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
       <NavDropdown title="Boards" id="basic-nav-dropdown">
         {boardDropdown}
         <NavDropdown.Divider />
-        <NavDropdown.Item onClick={() => createBoard()}>Create New Board</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/boards" onClick={() => createBoard()}>Create New Board</NavDropdown.Item>
       </NavDropdown>
 
         {authorised ? <Nav.Link as={Link} to="/logout">Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
