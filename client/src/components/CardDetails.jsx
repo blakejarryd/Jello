@@ -29,7 +29,7 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
 }
 
 //Edit form for card
-const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
+const CardDetailEdit = ({ card, submitEdit, switchEdit, board }) => {
   const initialState = {
     title: card.title,
     description: card.description,
@@ -48,6 +48,17 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
     event.preventDefault()
     submitEdit(updatedCard)
   }
+
+  const dropDownValues = board.columns.map((col) => {
+    if (col === updatedCard.status) {
+      return <option selected>{col}</option>} 
+    else {
+      return <option value={col}>{col}</option>
+    }
+  })
+
+
+
  
   return (
     <Container>
@@ -60,10 +71,7 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
           {/* TODO: Update this to use the board specific columns */}
           <label for="Status">Status</label>
           <select class="form-control" name="status" onChange={handleChange}>
-            <option selected>{updatedCard.status}</option>
-            <option value="To Do">To Do</option>
-            <option value="Doing">Doing</option>
-            <option value="Done">Done</option>
+            {dropDownValues}
           </select>
           <Button className = "editFormBtn" type="submit" variant="light" size="sm">Save</Button>
           <Button className = "editFormBtn" variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
@@ -102,7 +110,7 @@ const CardDetail = ({ handleDelete, handleEdit, board }) => {
 return (
   <>
     {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} board={board} />}
-    {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} />}
+    {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} board={board} />}
   </>
   )
 }
