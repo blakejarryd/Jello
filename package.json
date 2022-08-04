@@ -4,8 +4,8 @@
   "description": "<details>   <summary>Table of Contents</summary>   <ol>     <li>       <a href=\"#about-our-project\">About Our Project</a>       <ul>         <li><a href=\"#built-with\">Built With</a></li>       </ul>     </li>     <li><a href=\"#wireframe\">Wireframe</a></li>     <li><a href=\"#contributing\">Contributing</a></li>     <li><a href=\"#acknowledgments\">Acknowledgments</a></li>   </ol> </details>",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm i && npm run build"
   },
   "keywords": [],
   "author": "",
