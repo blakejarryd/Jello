@@ -2,6 +2,7 @@ import Card from './Card'
 import { useState, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -14,27 +15,17 @@ const CreateCard = ({ onFormSubmit, status }) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
-    onFormSubmit(taskName, status)
+    onFormSubmit("new card", status)
     setTaskName("")
   }
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        <input 
-          as="input"
-          variant="outline-dark"
-          type="text"
-          name="title"
-          value={taskName}
-          onChange={handleChange}
-        />
-      </label>
-      <Button as="input" type="submit" variant="secondary" className="add-button" size="sm" value="+"/>
+      <Button as="input" type="submit" variant="secondary" className="add-button new-card" size="sm" value="+"/>
     </form>
   )
 }
 
-const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus }) => {
+const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, deleteColumn }) => {
   const [editing, setEditing] = useState(false)
 
   const switchEdit = () => {
@@ -67,7 +58,15 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
       event.preventDefault()
       let columnsArray = [...board.columns]
       const replaceIndex = columnsArray.indexOf(name)
-      columnsArray[replaceIndex] = columnName
+      //check for existing column name
+      const ogName = columnName
+      let i = 1
+      let newName = ogName
+      while (board.columns.includes(newName)) {
+        newName =  ogName + ' ' + i
+        i++
+      }
+      columnsArray[replaceIndex] = newName
       editBoard({
         ...board,
         columns: columnsArray
@@ -94,17 +93,23 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
   }
 
   return (
-    cards && <div>
+    cards && 
+    <div className="column">
+      <div className="col-header">
       {!editing && <ColumnName key="BoardName"/> }
       {editing && <ColumnNameEdit key="BoardNameEdit"/> }
-        <Droppable droppableId={name}>
-          {(provided) => (
-            <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
-              {cardsList}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+      <Button onClick={() => deleteColumn(name)} className='btn-sm trash' type="submit" variant="secondary">
+      <i className="bi bi-trash"></i>
+      </Button>
+      </div>
+      <Droppable droppableId={name}>
+        {(provided) => (
+          <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
+            {cardsList}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <CreateCard onFormSubmit={onFormSubmit} status={name}/>
     </div>
   )

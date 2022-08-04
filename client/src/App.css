@@ -1,3 +1,26 @@
+body {
+  color: #253237;
+  background-color: #F0F2FA;
+  font-family: 'Helvetica', sans-serif;
+}
+
+div.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+.nav-img {
+  padding: 10px;
+  max-height: 60px;
+}
+
+.colour-nav {
+  background-color: #DFC9EA;
+}
 
 .edit-button {
   position: absolute;
@@ -15,21 +38,78 @@
 }
 
 .boardtitle {
-  display:inline-block; 
+  display:inline-block;
+  color: #253237; 
+  margin-bottom: 20px;
 }
 
 .boardtitle:hover {
   font-style: italic;
-  color: grey;
+  color: #85A1AD;
   cursor: pointer
 }
 
+.column {
+  padding: 10px;
+  background-color: #D2D8EF;
+  border: 2px solid darkgray;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px #8696D5;
+  margin-bottom: 30px;
+  width: 300px;
+}
+
 .columntitle {
-  display:inline-block; 
+  display:inline-block;
+  color: #253237; 
 }
 
 .columntitle:hover {
   font-style: italic;
-  color: grey;
+  color: #85A1AD;
   cursor: pointer
+}
+
+.col-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1B4971;
+}
+
+
+.card {
+  margin: 5px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  min-height: 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button {
+  background-color: #8696D5;
+  border: none;
+}
+
+.card-name a {
+  text-decoration: none;
+  color: darkslategray;
+}
+
+.card-name h5 {
+  font-size: 18px;
+}
+
+.new-column, .new-card {
+  background-color: #8696D5;
+  border: none;
+}
+
+.trash {
+  max-height: 35px;
+  margin-right: 5px;
+  background-color: #8696D5;;
+  border: none
 }

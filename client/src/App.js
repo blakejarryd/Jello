@@ -119,9 +119,28 @@ const App = () => {
   }
 
   const createColumn = () => {
+    const ogName = "New Column"
+    let i = 1
+    let newName = ogName
+    while (board.columns.includes(newName)) {
+      newName =  ogName + ' ' + i
+      i++
+    }
     const updatedBoard = {
       ...board,
-      columns: [...board.columns, "New Column"]
+      columns: [...board.columns, newName]
+    }
+    editBoard(updatedBoard)
+  }
+
+
+  const deleteColumn = (columnName) => {
+    console.log(columnName)
+    let columns = [...board.columns]
+    let updatedColumns = columns.filter((e) => e != columnName)
+    const updatedBoard = {
+      ...board,
+      columns: updatedColumns
     }
     editBoard(updatedBoard)
   }
@@ -148,21 +167,38 @@ const App = () => {
     getBoards()
   }, [])
 
+
+
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home authorised={authorised} />} />
+        <Route exact path="/" element={
+          <>
+            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }        
+            <Home />
+            <Register handleRegister={handleAuth} />
+          </>
+        }/>
+
         <Route path="/login" element={<Login handleLogin={handleAuth} />} />
         <Route path="/register" element={<Register handleRegister={handleAuth} />} />
         <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
         
         <Route path='/boards' element={
           <>
-            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
+            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
             <DndProvider backend={HTML5Backend}>
-              {/* <ProtectedRoute authorised={authorised}>   */}
-                {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
-              {/* </ProtectedRoute> */}
+              <ProtectedRoute authorised={authorised}>  
+                {board && <Board 
+                  board={board} 
+                  setBoard={setBoard} 
+                  editBoard={editBoard} 
+                  editCardsStatus={editCardsStatus} 
+                  createColumn={createColumn}
+                  deleteColumn={deleteColumn}
+                  updateBoardOrder={updateBoardOrder}
+                  /> }
+              </ProtectedRoute>
             </DndProvider>
           </>
         } />

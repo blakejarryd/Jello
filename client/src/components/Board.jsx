@@ -8,7 +8,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, updateBoardOrder }) => {
+
+const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, deleteColumn, updateBoardOrder }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
 
@@ -41,6 +42,8 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, upda
   }
 
   const handleCreate = async (name, status) => {
+    console.log(name)
+    console.log(status)
     const res = await fetch('/cards', {
       method: 'POST',
       headers: {
@@ -131,7 +134,20 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, upda
   }, [board])
 
   const columnsList = board.columns.map((column) => {
-    return (cards && <Col><Column key={column}name={column} cards={cards[column]} onFormSubmit={handleCreate} handleEdit={handleEdit} onDrop={handleDrop} board={board} editBoard={editBoard} editCardsStatus={editCardsStatus} handleDragEnd={handleDragEnd}/></Col>)
+    return (cards && 
+      <Col><Column 
+        key={column}
+        name={column} 
+        cards={cards[column]} 
+        onFormSubmit={handleCreate} 
+        handleEdit={handleEdit} 
+        onDrop={handleDrop} 
+        board={board} 
+        editBoard={editBoard} 
+        editCardsStatus={editCardsStatus} 
+        handleDragEnd={handleDragEnd}
+        deleteColumn={deleteColumn}
+        /></Col>)
   })
 
   const BoardName = () => {
@@ -157,7 +173,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, upda
     return (
       <form onSubmit={submit} className="m-3 d-flex align-content-center">
         <input className="p-1 fs-2"type="text" name="title" value={boardName} onChange={handleChange}/>
-        <Button className="m-1"type="submit" variant="primary" size="lg">
+        <Button className="m-1"type="submit" variant="secondary" size="lg">
          <i className="bi bi-arrow-return-right"></i>
         </Button>
       </form>
@@ -165,18 +181,17 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, upda
   }
 
   return (
-    <Container>
+    <Container className="horizontal-scroll">
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
       <Row>
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
         <Col>
-          <Button onClick={createColumn}>New Column</Button>
+          <Button className="new-column" onClick={createColumn}>New Column</Button>
         </Col>
       </DragDropContext>
       </Row>
-      
     </Container>
   )
 }
