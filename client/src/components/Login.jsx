@@ -29,7 +29,7 @@ const Login = (props) => {
   return (
     <div className="container register">
       <Form onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        <h1>Login</h1>
         <Form.Group>
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control
