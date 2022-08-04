@@ -156,4 +156,29 @@ div.container {
   border: none;
 }
 
+.editFormBtn {
+  background-color: #CBA7DC;
+  border: 2px solid;
+  border-color: #BA8AD0;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px #CBA7DC;
+  margin: 5px;
+  min-width: 60px;
+  margin-left: 0;
+}
+
+.description {
+  font-style: italic;
+}
+
+.cardDetail {
+  margin-top: 40px;
+  padding: 10px;
+  background-color: #D2D8EF;
+  border: 2px solid darkgray;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px #8696D5;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
 
