@@ -157,14 +157,13 @@ div.container {
 }
 
 .editFormBtn {
-  background-color: #CBA7DC;
-  border: 2px solid;
-  border-color: #BA8AD0;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px #CBA7DC;
+  background-color: #8696D5;
+  border: none;
+  border-radius: 5px;
   margin: 5px;
   min-width: 60px;
   margin-left: 0;
+  color: whitesmoke;
 }
 
 .description {
