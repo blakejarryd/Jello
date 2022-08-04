@@ -29,28 +29,30 @@ const Register = (props) => {
     <div className="container register">
       <Form onSubmit={handleSubmit}>
         <h1>Register</h1>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
+        <Form.Group>
+          <Form.Label htmlFor="username">Username</Form.Label>
+          <Form.Control
             value={fields.username}
             onChange={handleChange}
             name="username"
             type="text"
             id="username"
+            className="form-text"
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
             value={fields.password}
             onChange={handleChange}
             name="password"
             type="password"
             id="password"
+            className="form-text"
           />
-        </div>
+        </Form.Group><br/>
         <Button type="submit" variant="light">Register</Button>
-        <p>Already have an account? <Link to="/login">Login here</Link></p>
+        <p>Already have an account? <Link to="/login" className="link-text">Login here</Link></p>
       </Form>
     </div>
   )

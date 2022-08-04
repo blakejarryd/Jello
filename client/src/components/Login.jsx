@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 const Login = (props) => {
   const [fields, setFields] = useState({ username: '', password: '' })
 
@@ -24,31 +27,35 @@ const Login = (props) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          value={fields.username}
-          onChange={handleChange}
-          name="username"
-          type="text"
-          id="username"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          value={fields.password}
-          onChange={handleChange}
-          name="password"
-          type="password"
-          id="password"
-        />
-      </div>
-      <input type="submit" value="Login" />
-      <p>No account yet? <Link to="/register">Register here</Link></p>
-    </form>
+    <div className="container register">
+      <Form onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        <Form.Group>
+          <Form.Label htmlFor="username">Username</Form.Label>
+          <Form.Control
+            value={fields.username}
+            onChange={handleChange}
+            name="username"
+            type="text"
+            id="username"
+            className="form-text"
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Control
+            value={fields.password}
+            onChange={handleChange}
+            name="password"
+            type="password"
+            id="password"
+            className="form-text"
+          />
+        </Form.Group><br/>
+      <Button type="submit" value="Login" variant="light"/>
+      <p>No account yet? <Link to="/register" className="link-text">Register here</Link></p>
+    </Form>
+    </div>
   )
 }
 

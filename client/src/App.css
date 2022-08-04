@@ -47,6 +47,14 @@ div.container {
   padding: 10px;
 }
 
+.link-text {
+  color: #A05FBF;
+}
+
+.link-text:hover {
+  color: #52B7A1;
+}
+
 .trash {
   max-height: 35px;
   padding: 10px;
