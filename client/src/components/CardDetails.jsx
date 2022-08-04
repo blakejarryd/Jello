@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 
 //Component that displays read only card details - based on card param in URL
-const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
+const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
+
   return (
     <div>
       <h1>{card.title}</h1>
@@ -16,7 +17,7 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
       <Link to={'/boards'}>
         <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
       </Link>
-      <Link to='/boards'>
+      <Link to={`/boards/${board._id}`}>
         <Button variant="light" size="sm"> Cancel</Button>
       </Link>
     </div>
@@ -73,7 +74,7 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
   )
 }
 
-const CardDetail = ({ handleDelete, handleEdit }) => {
+const CardDetail = ({ handleDelete, handleEdit, board }) => {
   const [card, setCard] = useState(null)
   const [editing, setEditing] = useState(false)
   const { id } = useParams()
@@ -101,7 +102,7 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
 
 return (
   <>
-    {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} />}
+    {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} board={board} />}
     {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} />}
   </>
   )
