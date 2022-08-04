@@ -37,9 +37,9 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
   }
 
 
-    const cardsList = cards ? cards.map((card, index) => {
-      return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
-    }) : <Card />
+  const cardsList = cards ? cards.map((card, index) => {
+    return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
+  }) : <Card />
  
 
   const ColumnName = () => {
