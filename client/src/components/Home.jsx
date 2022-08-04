@@ -8,7 +8,7 @@ const Home = ({authorised}) => {
         <h2>Helps teams get a jiggle on</h2>
         <div>
           <h4>Team struggling to gel? Wobbling on how to manage their projects? Solidify your team’s plans. Let Jello help crystallise all of your ideas in one place.</h4>
-          {!authorised ? <h4><a href="#">Sign up - it's free</a></h4> : <h4><a href="#">Get a Jiggle On</a></h4>}
+          {!authorised ? <Link to="/register" className="link-text"><h4>Sign up - it's free</h4></Link> : <Link to="/boards" className="link-text"><h4>Get a Jiggle On</h4></Link>}
         </div>
       </div>
     </>
