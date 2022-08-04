@@ -169,6 +169,7 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }        
             <Home />
+            <Register handleRegister={handleAuth} />
           </>
         }/>
 

@@ -5,9 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom'
 import Image from "react-bootstrap/Image"
 
-
 const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
-
   const boardDropdown = boards.map((board) => {
     return <NavDropdown.Item key={board.name} as={Link} to="/boards" onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
   })

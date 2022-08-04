@@ -3,9 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-
 import Button from 'react-bootstrap/Button';
-
 
 const CardEdit = ({ card, handleEdit, switchEdit }) => {
   const [cardName, setCardName] = useState(card.title)
@@ -29,6 +27,7 @@ const CardEdit = ({ card, handleEdit, switchEdit }) => {
     </div>
   )
 }
+
 const CardDisplay = ({ card, edit }) => {
   return (
       <div className='card'>

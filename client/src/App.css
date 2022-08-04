@@ -1,11 +1,16 @@
 body {
   color: #253237;
-  background-color: #E8EBF7;
+  background-color: #F0F2FA;
+  font-family: 'Helvetica', sans-serif;
 }
 
 div.container {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
 }
 
 .nav-img {
@@ -14,7 +19,7 @@ div.container {
 }
 
 .colour-nav {
-  background-color: #D29DCC;
+  background-color: #DFC9EA;
 }
 
 .edit-button {
@@ -34,33 +39,34 @@ div.container {
 
 .boardtitle {
   display:inline-block;
-  color: #2368A2; 
+  color: #253237; 
   margin-bottom: 20px;
 }
 
 .boardtitle:hover {
   font-style: italic;
-  color: grey;
+  color: #85A1AD;
   cursor: pointer
 }
 
 .column {
   padding: 10px;
-  background-color: #fbe7e9;
+  background-color: #D2D8EF;
   border: 2px solid darkgray;
   border-radius: 15px;
-  box-shadow: 0 5px 10px #931621;
+  box-shadow: 0 5px 10px #8696D5;
   margin-bottom: 30px;
-  max-width: 300px;
+  width: 300px;
 }
 
 .columntitle {
-  display:inline-block; 
+  display:inline-block;
+  color: #253237; 
 }
 
 .columntitle:hover {
   font-style: italic;
-  color: grey;
+  color: #85A1AD;
   cursor: pointer
 }
 
@@ -75,7 +81,7 @@ div.container {
 .card {
   margin: 5px;
   padding: 10px;
-  background-color: #F0F2F4;
+  background-color: #FFFFFF;
   border-radius: 10px;
   min-height: 75px;
   display: flex;
@@ -83,7 +89,7 @@ div.container {
 }
 
 .edit-button {
-  background-color: #F0F2F4;
+  background-color: #8696D5;
   border: none;
 }
 
@@ -97,13 +103,13 @@ div.container {
 }
 
 .new-column, .new-card {
-  background-color: #931621;
+  background-color: #8696D5;
   border: none;
 }
 
 .trash {
   max-height: 35px;
   margin-right: 5px;
-  background-color: #931621;;
+  background-color: #8696D5;;
   border: none
 }

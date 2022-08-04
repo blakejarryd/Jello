@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 
 const Register = (props) => {
   const [fields, setFields] = useState({ username: '', password: '' })
@@ -23,31 +26,33 @@ const Register = (props) => {
   }
   
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Register</h1>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          value={fields.username}
-          onChange={handleChange}
-          name="username"
-          type="text"
-          id="username"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          value={fields.password}
-          onChange={handleChange}
-          name="password"
-          type="password"
-          id="password"
-        />
-      </div>
-      <input type="submit" value="Register" />
-      <p>Already have an account? <Link to="/login">Login here</Link></p>
-    </form>
+    <div className="container home">
+      <Form onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            value={fields.username}
+            onChange={handleChange}
+            name="username"
+            type="text"
+            id="username"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            value={fields.password}
+            onChange={handleChange}
+            name="password"
+            type="password"
+            id="password"
+          />
+        </div>
+        <Button type="submit" variant="light">Register</Button>
+        <p>Already have an account? <Link to="/login">Login here</Link></p>
+      </Form>
+    </div>
   )
 }
 
