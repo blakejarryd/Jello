@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
 //Component that displays read only card details - based on card param in URL
 const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
+  
+
   return (
-    <div>
+    <Container>
       <h1>{card.title}</h1>
-      <h5>Description</h5>
+      <p>Description:</p>
       <p>{card.description}</p>
       <p>Status: {card.status}</p>
       <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
@@ -19,7 +22,7 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
       <Link to={`/boards/${board._id}`}>
         <Button variant="light" size="sm"> Cancel</Button>
       </Link>
-    </div>
+    </Container>
   )
 }
 
@@ -45,31 +48,24 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
   }
  
   return (
-    <div>
+    <Container>
       <form onSubmit={submit}>
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
-        </div>
-        <div class="input-group">
-          <label for="description">Description</label>
-          <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
-        </div>
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
         {/* TODO: Update this to use the board specific columns */}
-        <div class="form-group">
-          <label for="Status">Status</label>
-          <br/>
-          <select class="form-control" name="status" onChange={handleChange}>
-            <option selected>{updatedCard.status}</option>
-            <option value="To Do">To Do</option>
-            <option value="Doing">Doing</option>
-            <option value="Done">Done</option>
-          </select>
-        </div>
+        <label for="Status">Status</label>
+        <select class="form-control" name="status" onChange={handleChange}>
+          <option selected>{updatedCard.status}</option>
+          <option value="To Do">To Do</option>
+          <option value="Doing">Doing</option>
+          <option value="Done">Done</option>
+        </select>
         <Button type="submit" size="sm">Save</Button>
         <Button variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
       </form>
-    </div>
+    </Container>
   )
 }
 
