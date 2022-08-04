@@ -173,8 +173,8 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
 
   return (
     <div className="App">
-
       <Routes>
+
         <Route exact path="/" element={
           <>
             {navbar} 
@@ -185,9 +185,19 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
           </>
         }/>
 
-        <Route path="/login" element={<Login handleLogin={handleAuth} />} />
-        <Route path="/register" element={<Register handleRegister={handleAuth} />} />
-        <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
+        <Route path="/login" element={
+          <>
+            {navbar}
+            <Login handleLogin={handleAuth} />
+          </>
+        } />
+        
+        <Route path="/register" element={
+          <>
+            {navbar}
+            <Register handleRegister={handleAuth} />
+          </>
+        } />
         <Route path='/boards' element={
           <>
             <ProtectedRoute authorised={authorised}> 
