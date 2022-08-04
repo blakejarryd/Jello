@@ -11,7 +11,12 @@ div.container {
 
 .horizontal-scroll {
   overflow-x: auto;
+  display: flex
 }
+
+/*.horizontal-stacking {
+  ;
+}*/
 
 .nav-img {
   padding: 10px;
@@ -48,6 +53,7 @@ div.container {
   color: #85A1AD;
   cursor: pointer
 }
+
 
 .column {
   padding: 10px;
