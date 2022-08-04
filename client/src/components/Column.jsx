@@ -28,6 +28,13 @@ const CreateCard = ({ onFormSubmit, status }) => {
 const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, deleteColumn }) => {
   const [editing, setEditing] = useState(false)
 
+  if (cards) {
+    cards.sort((a, b) => {
+      return a.rank - b.rank;
+    })
+  }
+ 
+
   const switchEdit = () => {
     setEditing(!editing)
   }
@@ -36,10 +43,6 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
     handleDragEnd(result)
   }
 
-
-  const cardsList = cards ? cards.map((card, index) => {
-    return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index}/>
-  }) : <Card />
  
 
   const ColumnName = () => {
@@ -102,10 +105,12 @@ const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handl
       <i className="bi bi-trash"></i>
       </Button>
       </div>
-      <Droppable droppableId={name}>
+      <Droppable droppableId={name} onDragEnd={onDragEnd}>
         {(provided) => (
           <div className="cards" {...provided.droppableProps} ref={provided.innerRef}>
-            {cardsList}
+            {cards ? cards.map((card, index) => {
+                return <Card key={index} id={card._id} card={card} handleEdit={handleEdit} index={index} ref={provided.innerRef}/>
+              }) : <Card />}
             {provided.placeholder}
           </div>
         )}
