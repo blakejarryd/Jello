@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 
+
 const Register = (props) => {
+  const navigate = useNavigate()
+
   const [fields, setFields] = useState({ username: '', password: '' })
 
   const handleChange = (event) => { 
@@ -22,6 +25,7 @@ const Register = (props) => {
       body: JSON.stringify(fields)
     })
     const data = await res.json()
+    navigate("/login")
     console.log(data)
   }
   
