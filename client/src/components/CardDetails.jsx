@@ -11,17 +11,19 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
 
   return (
     <Container>
-      <h1>{card.title}</h1>
-      <p>Description:</p>
-      <p>{card.description}</p>
-      <p>Status: {card.status}</p>
-      <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
-      <Link to={`/boards/${board._id}`}>
-        <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
-      </Link>
-      <Link to={`/boards/${board._id}`}>
-        <Button variant="light" size="sm"> Cancel</Button>
-      </Link>
+      <div className = 'cardDetail'>
+        <h1>{card.title}</h1>
+        <p>Description:</p>
+        <p className='description'>{card.description}</p>
+        <p>Status: {card.status}</p>
+        <Button className = "editFormBtn" variant="light" size="sm" onClick={switchEdit}>Edit</Button>
+        <Link to={`/boards/${board._id}`}>
+          <Button className = "editFormBtn" variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
+        </Link>
+        <Link to={`/boards/${board._id}`}>
+          <Button className = "editFormBtn" variant="light" size="sm"> Cancel</Button>
+        </Link>
+      </div>
     </Container>
   )
 }
@@ -49,22 +51,24 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
  
   return (
     <Container>
-      <form onSubmit={submit}>
-        <label for="title">Title</label>
-        <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
-        <label for="description">Description</label>
-        <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
-        {/* TODO: Update this to use the board specific columns */}
-        <label for="Status">Status</label>
-        <select class="form-control" name="status" onChange={handleChange}>
-          <option selected>{updatedCard.status}</option>
-          <option value="To Do">To Do</option>
-          <option value="Doing">Doing</option>
-          <option value="Done">Done</option>
-        </select>
-        <Button type="submit" size="sm">Save</Button>
-        <Button variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
-      </form>
+      <div className = 'cardDetail'>
+        <form onSubmit={submit}>
+          <label for="title">Title</label>
+          <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
+          <label for="description">Description</label>
+          <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
+          {/* TODO: Update this to use the board specific columns */}
+          <label for="Status">Status</label>
+          <select class="form-control" name="status" onChange={handleChange}>
+            <option selected>{updatedCard.status}</option>
+            <option value="To Do">To Do</option>
+            <option value="Doing">Doing</option>
+            <option value="Done">Done</option>
+          </select>
+          <Button className = "editFormBtn" type="submit" variant="light" size="sm">Save</Button>
+          <Button className = "editFormBtn" variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
+        </form>
+      </div>
     </Container>
   )
 }
