@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useDrag, useDrop } from 'react-dnd'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { useState } from 'react'
+import { useDrag } from 'react-dnd'
+import { Draggable } from 'react-beautiful-dnd'
 
 import Button from 'react-bootstrap/Button';
 
@@ -32,9 +32,9 @@ const CardDisplay = ({ card, edit }) => {
   return (
       <div className='card'>
         <div className="card-name">
-          <Link to={`/${card._id}`} >
-              <h5>{card.title}</h5>   
-          </Link>
+            <Link to={`./${card._id}`} >
+                <h5>{card.title}</h5>   
+            </Link>
         </div>
           <Button variant="light" size="sm" onClick={edit} className="edit-button">
             <i className="bi bi-pen" style={{ fontSize: 15 }}></i>

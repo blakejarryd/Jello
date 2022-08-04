@@ -2,61 +2,73 @@
   {
     "title":"Design Logo",
     "description":"Need to be colourful and eye catching",
-    "status":"To Do"
+    "status":"To Do",
+    "rank": 1
   },
   {
     "title":"Buy donuts for the team",
     "description":"People are more motivated when there are donuts",
-    "status":"To Do"
+    "status":"To Do",
+    "rank": 2
   },
   {
     "title":"Standardized coding conventions",
     "description":"pascal case, camel case, snake case. This code base is a mess",
-    "status":"To Do"
+    "status":"To Do",
+    "rank": 3
   },
   {
     "title":"Plant work party",
     "description":"Everybody loves a party",
-    "status":"To Do"
+    "status":"To Do",
+    "rank": 4
   },
   {
     "title":"Makes some sales",
     "description":"Need to sell some stuff to afford party and donuts",
-    "status":"Doing"
+    "status":"Doing",
+    "rank": 1
   },
   {
     "title":"Purchase HDMI cords",
     "description":"Seriously who keeps taking all the HDMI cords?",
-    "status":"Doing"
+    "status":"Doing",
+    "rank": 2
   },
   {
     "title":"Fight CSS",
     "description":"Everyday I am styling",
-    "status":"Doing"
+    "status":"Doing",
+    "rank": 3
   },
   {
     "title":"Create Postman test collection",
     "description":"",
-    "status":"Doing"
+    "status":"Doing",
+    "rank": 4
   },
   {
     "title":"Product name",
     "description":"Everybody loves Jello",
-    "status":"Done"
+    "status":"Done",
+    "rank": 1
   },
   {
     "title":"Consume 7 coffees",
     "description":"I really should get one of those loyalty cards",
-    "status":"Done"
+    "status":"Done",
+    "rank": 2
   },
   {
     "title":"Create Git repo",
     "description":"All hail git",
-    "status":"Done"
+    "status":"Done",
+    "rank": 3
   },
   {
     "title":"Buy headphones",
     "description":"Need some of that noise cancelling goodness",
-    "status":"Done"
+    "status":"Done",
+    "rank": 4
   }
 ]

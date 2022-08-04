@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import './App.css';
 
@@ -215,7 +215,12 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
              </ProtectedRoute>
            </>
         } />
-        <Route path='/:id' element={<CardDetail handleDelete={handleDelete} handleEdit={handleEdit}/>} />
+          <Route path='/boards/:boardID/:id' element={
+            <ProtectedRoute authorised={authorised}> 
+              {navbar}
+              {board && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
+            </ProtectedRoute>
+          } />
       </Routes>
     </div>
   );

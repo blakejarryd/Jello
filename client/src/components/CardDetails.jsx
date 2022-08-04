@@ -3,28 +3,33 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
 //Component that displays read only card details - based on card param in URL
-const CardDetailDisplay = ({ card, handleDelete, switchEdit }) => {
+const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
+  
+
   return (
-    <div>
-      <h1>{card.title}</h1>
-      <h5>Description</h5>
-      <p>{card.description}</p>
-      <p>Status: {card.status}</p>
-      <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
-      <Link to={'/boards'}>
-        <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
-      </Link>
-      <Link to='/boards'>
-        <Button variant="light" size="sm"> Cancel</Button>
-      </Link>
-    </div>
+    <Container>
+      <div className = 'cardDetail'>
+        <h1>{card.title}</h1>
+        <p>Description:</p>
+        <p className='description'>{card.description}</p>
+        <p>Status: {card.status}</p>
+        <Button className = "editFormBtn" variant="light" size="sm" onClick={switchEdit}>Edit</Button>
+        <Link to={`/boards/${board._id}`}>
+          <Button className = "editFormBtn" variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
+        </Link>
+        <Link to={`/boards/${board._id}`}>
+          <Button className = "editFormBtn" variant="light" size="sm"> Cancel</Button>
+        </Link>
+      </div>
+    </Container>
   )
 }
 
 //Edit form for card
-const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
+const CardDetailEdit = ({ card, submitEdit, switchEdit, board }) => {
   const initialState = {
     title: card.title,
     description: card.description,
@@ -43,37 +48,40 @@ const CardDetailEdit = ({ card, submitEdit, switchEdit }) => {
     event.preventDefault()
     submitEdit(updatedCard)
   }
+
+  const dropDownValues = board.columns.map((col) => {
+    if (col === updatedCard.status) {
+      return <option selected>{col}</option>} 
+    else {
+      return <option value={col}>{col}</option>
+    }
+  })
+
+
+
  
   return (
-    <div>
-      <form onSubmit={submit}>
-        <div class="form-group">
+    <Container>
+      <div className = 'cardDetail'>
+        <form onSubmit={submit}>
           <label for="title">Title</label>
           <input class="form-control" type="text" name="title" value={updatedCard.title} onChange={handleChange}/>
-        </div>
-        <div class="input-group">
           <label for="description">Description</label>
           <textarea class="form-control" name="description" value={updatedCard.description} onChange={handleChange}/>
-        </div>
-        {/* TODO: Update this to use the board specific columns */}
-        <div class="form-group">
+          {/* TODO: Update this to use the board specific columns */}
           <label for="Status">Status</label>
-          <br/>
           <select class="form-control" name="status" onChange={handleChange}>
-            <option selected>{updatedCard.status}</option>
-            <option value="To Do">To Do</option>
-            <option value="Doing">Doing</option>
-            <option value="Done">Done</option>
+            {dropDownValues}
           </select>
-        </div>
-        <Button type="submit" size="sm">Save</Button>
-        <Button variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
-      </form>
-    </div>
+          <Button className = "editFormBtn" type="submit" variant="light" size="sm">Save</Button>
+          <Button className = "editFormBtn" variant="light" size="sm" onClick={switchEdit}>Cancel</Button>
+        </form>
+      </div>
+    </Container>
   )
 }
 
-const CardDetail = ({ handleDelete, handleEdit }) => {
+const CardDetail = ({ handleDelete, handleEdit, board }) => {
   const [card, setCard] = useState(null)
   const [editing, setEditing] = useState(false)
   const { id } = useParams()
@@ -89,7 +97,7 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
   }
 
   const getCard = async (id) => {
-    const url = `http://localhost:3000/cards/${id}`
+    const url = `/cards/${id}`
     const res = await fetch(url)
     const cardData = await res.json()
     setCard(cardData)
@@ -101,8 +109,8 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
 
 return (
   <>
-    {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} />}
-    {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} />}
+    {card && !editing && < CardDetailDisplay card={card} handleDelete={handleDelete} switchEdit={switchEdit} board={board} />}
+    {card && editing && < CardDetailEdit card={card} submitEdit={submitEdit} switchEdit={switchEdit} board={board} />}
   </>
   )
 }
