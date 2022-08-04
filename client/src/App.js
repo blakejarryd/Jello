@@ -144,6 +144,13 @@ const App = () => {
     }
     editBoard(updatedBoard)
   }
+  const updateBoardOrder = (newOrder) => {
+    const updatedBoard = {
+      ...board,
+      cards: newOrder
+    }
+    editBoard(updatedBoard)
+  }
 
   // code for protected route
   useEffect(() => {
@@ -189,6 +196,7 @@ const App = () => {
                   editCardsStatus={editCardsStatus} 
                   createColumn={createColumn}
                   deleteColumn={deleteColumn}
+                  updateBoardOrder={updateBoardOrder}
                   /> }
               </ProtectedRoute>
             </DndProvider>
