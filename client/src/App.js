@@ -215,9 +215,10 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
              </ProtectedRoute>
            </>
         } />
-          <Route path='/cards/:id' element={
+          <Route path='/boards/:boardID/:id' element={
             <ProtectedRoute authorised={authorised}> 
-              <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>
+              {navbar}
+              {board && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
             </ProtectedRoute>
           } />
       </Routes>

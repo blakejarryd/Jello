@@ -32,7 +32,7 @@ const CardDisplay = ({ card, edit }) => {
   return (
       <div className='card'>
         <div className="card-name">
-            <Link to={`/cards/${card._id}`} >
+            <Link to={`./${card._id}`} >
                 <h5>{card.title}</h5>   
             </Link>
         </div>

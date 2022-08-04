@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 
 //Component that displays read only card details - based on card param in URL
 const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
-
   return (
     <div>
       <h1>{card.title}</h1>
@@ -14,7 +13,7 @@ const CardDetailDisplay = ({ card, handleDelete, switchEdit, board }) => {
       <p>{card.description}</p>
       <p>Status: {card.status}</p>
       <Button variant="light" size="sm" onClick={switchEdit}>Edit</Button>
-      <Link to={'/boards'}>
+      <Link to={`/boards/${board._id}`}>
         <Button variant="light" size="sm"  onClick={() => handleDelete(card._id)}>Delete</Button>
       </Link>
       <Link to={`/boards/${board._id}`}>
