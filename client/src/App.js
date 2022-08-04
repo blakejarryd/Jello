@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
 
 import './App.css';
 
@@ -25,7 +25,7 @@ const App = () => {
 
   const handleAuth = (authed) => {
     setAuthorised(authed)
-    navigate("/")
+    navigate("/boards")
   }
 
   const handleLogout = () => {
@@ -134,7 +134,6 @@ const App = () => {
     editBoard(updatedBoard)
   }
 
-
   const deleteColumn = (columnName) => {
     console.log(columnName)
     let columns = [...board.columns]
@@ -153,7 +152,6 @@ const App = () => {
     editBoard(updatedBoard)
   }
 
-  // code for protected route
   useEffect(() => {
     const checkIfLoggedIn = async () => {
       const res = await fetch("/users/isauthorised")
@@ -198,6 +196,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
             <Register handleRegister={handleAuth} />
           </>
         } />
+
         <Route path='/boards' element={
           <>
             <ProtectedRoute authorised={authorised}> 
@@ -207,6 +206,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
             </ProtectedRoute>  
           </>
         } />
+
         <Route path='/boards/:boardID' element={
           <>
             <ProtectedRoute authorised={authorised}> 
@@ -225,12 +225,14 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
              </ProtectedRoute>
            </>
         } />
-          <Route path='/boards/:boardID/:id' element={
-            <ProtectedRoute authorised={authorised}> 
-              {navbar}
-              {board && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
-            </ProtectedRoute>
-          } />
+
+        <Route path='/boards/:boardID/:id' element={
+          <ProtectedRoute authorised={authorised}> 
+            {navbar}
+            {board && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
+          </ProtectedRoute>
+        } />
+
       </Routes>
     </div>
   );
