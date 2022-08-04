@@ -7,7 +7,7 @@ const Logout = (props) => {
   }
 
   return (
-    <button onClick={handleClick} className="logout-btn">Logout</button>
+    <button onClick={handleClick} className="login-logout-btn">Logout</button>
   )
 }
 

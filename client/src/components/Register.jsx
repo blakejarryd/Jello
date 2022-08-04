@@ -26,7 +26,7 @@ const Register = (props) => {
   }
   
   return (
-    <div className="container home">
+    <div className="container register">
       <Form onSubmit={handleSubmit}>
         <h1>Register</h1>
         <div>
