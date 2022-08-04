@@ -173,6 +173,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
 
   return (
     <div className="App">
+
       <Routes>
         <Route exact path="/" element={
           <>

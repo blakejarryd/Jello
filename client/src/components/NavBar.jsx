@@ -8,7 +8,6 @@ import Image from "react-bootstrap/Image"
 import Logout from "./Logout"
 
 const NavBar = ({ boards, setBoard, createBoard, authorised, handleLogout}) => {
-  console.log(handleLogout, "annoying")
   let { boardID } = useParams()
 
   useEffect(() => {
