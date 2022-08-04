@@ -126,11 +126,9 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
       return;
     }
     if (!result) {
-      console.log('fuck', result)
       return;
     }
     if (result.destination.index === result.source.index && result.destination.droppableId === result.source.droppableId) {
-      console.log('fuck', result)
       return;
     }
     const start = result.source.droppableId
@@ -157,14 +155,13 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
 
   }
 
-
   useEffect(() => {
     getCards()
   }, [board])
 
   const columnsList = board.columns.map((column) => {
     return (cards && 
-      <Col><Column 
+      <div className="stacks"><Column 
         key={column}
         name={column} 
         cards={cards[column]} 
@@ -176,7 +173,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
         editCardsStatus={editCardsStatus} 
         handleDragEnd={handleDragEnd}
         deleteColumn={deleteColumn}
-        /></Col>)
+        /></div>)
   })
 
   const BoardName = () => {
@@ -210,18 +207,18 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
   }
 
   return (
-    <Container className="horizontal-scroll">
+    <div className="whole-board">
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
-      <Row>
+      <div className="horizontal-scroll">
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
-        <Col>
+        <div className="horizontal-stacking">
           <Button className="new-column" onClick={createColumn}>New Column</Button>
-        </Col>
+        </div>
       </DragDropContext>
-      </Row>
-    </Container>
+      </div>
+    </div>
   )
 }
 

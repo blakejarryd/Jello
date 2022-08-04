@@ -5,8 +5,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from "react-bootstrap/Image"
+import Logout from "./Logout"
 
-const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
+const NavBar = ({ boards, setBoard, createBoard, authorised, handleLogout}) => {
   let { boardID } = useParams()
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
         <NavDropdown.Item as={Link} to="/boards" onClick={() => createBoard()}>Create New Board</NavDropdown.Item>
       </NavDropdown>
 
-        {authorised ? <Nav.Link as={Link} to="/logout">Logout</Nav.Link> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
+        {authorised ? <Logout handleLogout={handleLogout}/> : <Nav.Link as={Link} to="/login"><button className="login-logout-btn">Login</button></Nav.Link>}
       </Nav>
     </Container>
   </Navbar>

@@ -145,14 +145,13 @@ const App = () => {
     }
     editBoard(updatedBoard)
   }
-  // const updateBoardOrder = (newOrder) => {
-  //   const updatedBoard = {
-  //     ...board,
-  //     cards: newOrder
-  //   }
-  //   console.log('this,', updatedBoard)
-  //   editBoard(updatedBoard)
-  
+  const updateBoardOrder = (newOrder) => {
+    const updatedBoard = {
+      ...board,
+      cards: newOrder
+    }
+    editBoard(updatedBoard)
+  }
 
   // code for protected route
   useEffect(() => {
@@ -170,16 +169,19 @@ const App = () => {
   }, [])
 
 
-
+const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} handleLogout={handleLogout}/>
 
   return (
     <div className="App">
+
       <Routes>
         <Route exact path="/" element={
           <>
-            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }        
-            <Home />
-            <Register handleRegister={handleAuth} />
+            {navbar} 
+            <div className="home-flex">       
+              <Home />
+              <Register handleRegister={handleAuth} />
+            </div>
           </>
         }/>
 
@@ -189,7 +191,7 @@ const App = () => {
         <Route path='/boards' element={
           <>
             <ProtectedRoute authorised={authorised}> 
-              {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+              {navbar} 
               <h1>Board Home Page</h1>
               <h3>Select a board</h3>
             </ProtectedRoute>  
@@ -199,7 +201,7 @@ const App = () => {
           <>
             <ProtectedRoute authorised={authorised}> 
               <DndProvider backend={HTML5Backend}>
-                {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+                {navbar}
                 {board && <Board 
                  board={board} 
                  setBoard={setBoard} 
@@ -207,6 +209,7 @@ const App = () => {
                  editCardsStatus={editCardsStatus} 
                  createColumn={createColumn}
                  deleteColumn={deleteColumn}
+                 updateBoardOrder={updateBoardOrder}
                  /> }
                </DndProvider>
              </ProtectedRoute>
