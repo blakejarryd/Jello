@@ -136,7 +136,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
 
   const columnsList = board.columns.map((column) => {
     return (cards && 
-      <Col><Column 
+      <div className="horizontal-stacking"><Column 
         key={column}
         name={column} 
         cards={cards[column]} 
@@ -148,7 +148,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
         editCardsStatus={editCardsStatus} 
         handleDragEnd={handleDragEnd}
         deleteColumn={deleteColumn}
-        /></Col>)
+        /></div>)
   })
 
   const BoardName = () => {
@@ -182,18 +182,18 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
   }
 
   return (
-    <Container className="horizontal-scroll">
+    <div>
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
-      <Row>
+      <div className="horizontal-scroll">
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
-        <Col>
+        <div className="horizontal-stacking">
           <Button className="new-column" onClick={createColumn}>New Column</Button>
-        </Col>
+        </div>
       </DragDropContext>
-      </Row>
-    </Container>
+      </div>
+    </div>
   )
 }
 
