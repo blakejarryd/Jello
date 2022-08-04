@@ -134,15 +134,15 @@ const App = () => {
   }
 
   // code for protected route
-  useEffect(() => {
-    const checkIfLoggedIn = async () => {
-      const res = await fetch("/users/isauthorised")
-      const data = await res.json()
-      console.log(data.msg)
-      setAuthorised(data.authorised)
-    }
-    checkIfLoggedIn()
-  }, [])
+  // useEffect(() => {
+  //   const checkIfLoggedIn = async () => {
+  //     const res = await fetch("/users/isauthorised")
+  //     const data = await res.json()
+  //     console.log(data.msg)
+  //     setAuthorised(data.authorised)
+  //   }
+  //   checkIfLoggedIn()
+  // }, [])
 
   useEffect(() => {
     getBoards()
@@ -160,9 +160,9 @@ const App = () => {
           <>
             {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} /> }
             <DndProvider backend={HTML5Backend}>
-              <ProtectedRoute authorised={authorised}>  
+              {/* <ProtectedRoute authorised={authorised}>   */}
                 {board && <Board board={board} setBoard={setBoard} editBoard={editBoard} editCardsStatus={editCardsStatus} createColumn={createColumn}/> }
-              </ProtectedRoute>
+              {/* </ProtectedRoute> */}
             </DndProvider>
           </>
         } />
