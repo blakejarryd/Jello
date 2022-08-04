@@ -2,6 +2,7 @@ import Card from './Card'
 import { useState, useEffect } from 'react'
 import { useDrop } from 'react-dnd'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
@@ -14,21 +15,11 @@ const CreateCard = ({ onFormSubmit, status }) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
-    onFormSubmit(taskName, status)
+    onFormSubmit("new card", status)
     setTaskName("")
   }
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        <input 
-          as="input"
-          variant="outline-dark"
-          type="text"
-          name="title"
-          value={taskName}
-          onChange={handleChange}
-        />
-      </label>
       <Button as="input" type="submit" variant="secondary" className="add-button new-card" size="sm" value="+"/>
     </form>
   )

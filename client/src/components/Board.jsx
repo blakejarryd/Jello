@@ -170,7 +170,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
   }
 
   return (
-    <Container>
+    <Container className="horizontal-scroll">
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
       <Row>
@@ -181,7 +181,6 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
         </Col>
       </DragDropContext>
       </Row>
-      
     </Container>
   )
 }
