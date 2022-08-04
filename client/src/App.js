@@ -153,15 +153,15 @@ const App = () => {
   }
 
   // code for protected route
-  // useEffect(() => {
-  //   const checkIfLoggedIn = async () => {
-  //     const res = await fetch("/users/isauthorised")
-  //     const data = await res.json()
-  //     console.log(data.msg)
-  //     setAuthorised(data.authorised)
-  //   }
-  //   checkIfLoggedIn()
-  // }, [])
+  useEffect(() => {
+    const checkIfLoggedIn = async () => {
+      const res = await fetch("/users/isauthorised")
+      const data = await res.json()
+      console.log(data.msg)
+      setAuthorised(data.authorised)
+    }
+    checkIfLoggedIn()
+  }, [])
 
   useEffect(() => {
     getBoards()
