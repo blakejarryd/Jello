@@ -33,7 +33,7 @@ const NavBar = ({ boards, setBoard, createBoard, authorised, handleLogout}) => {
         <NavDropdown.Item as={Link} to="/boards" onClick={() => createBoard()}>Create New Board</NavDropdown.Item>
       </NavDropdown>
 
-        {authorised ? <Logout handleLogout={handleLogout}/> : <Nav.Link as={Link} to="/login"><button>Login</button></Nav.Link>}
+        {authorised ? <Logout handleLogout={handleLogout}/> : <Nav.Link as={Link} to="/login"><button className="login-logout-btn">Login</button></Nav.Link>}
       </Nav>
     </Container>
   </Navbar>

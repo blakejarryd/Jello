@@ -23,6 +23,16 @@ div.container {
   padding: 10px;
 }
 
+.home {
+  padding: 10px;
+  margin: 10px;
+}
+
+.home-flex {
+  padding: 60px;
+  display: flex;
+}
+
 .nav-img {
   padding: 10px;
   max-height: 60px;
@@ -30,6 +40,11 @@ div.container {
 
 .colour-nav {
   background-color: #DFC9EA;
+}
+
+.register {
+  background-color: #D1D7F0;
+  padding: 10px;
 }
 
 .trash {
@@ -60,7 +75,7 @@ div.container {
   margin: 10px;
 }
 
-.logout-btn {
+.login-logout-btn {
   background-color: #CBA7DC;
   border: 2px solid;
   border-color: #BA8AD0;
@@ -80,7 +95,6 @@ div.container {
   color: #85A1AD;
   cursor: pointer
 }
-
 
 .column {
   padding: 10px;

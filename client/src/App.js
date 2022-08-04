@@ -145,14 +145,13 @@ const App = () => {
     }
     editBoard(updatedBoard)
   }
-  // const updateBoardOrder = (newOrder) => {
-  //   const updatedBoard = {
-  //     ...board,
-  //     cards: newOrder
-  //   }
-  //   console.log('this,', updatedBoard)
-  //   editBoard(updatedBoard)
-  
+  const updateBoardOrder = (newOrder) => {
+    const updatedBoard = {
+      ...board,
+      cards: newOrder
+    }
+    editBoard(updatedBoard)
+  }
 
   // code for protected route
   useEffect(() => {
@@ -178,9 +177,11 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
       <Routes>
         <Route exact path="/" element={
           <>
-            {navbar}        
-            <Home />
-            <Register handleRegister={handleAuth} />
+            {navbar} 
+            <div className="home-flex">       
+              <Home />
+              <Register handleRegister={handleAuth} />
+            </div>
           </>
         }/>
 
@@ -208,6 +209,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
                  editCardsStatus={editCardsStatus} 
                  createColumn={createColumn}
                  deleteColumn={deleteColumn}
+                 updateBoardOrder={updateBoardOrder}
                  /> }
                </DndProvider>
              </ProtectedRoute>
