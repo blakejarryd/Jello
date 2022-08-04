@@ -207,7 +207,6 @@ const App = () => {
                  editCardsStatus={editCardsStatus} 
                  createColumn={createColumn}
                  deleteColumn={deleteColumn}
-                 updateBoardOrder={updateBoardOrder}
                  /> }
                </DndProvider>
              </ProtectedRoute>

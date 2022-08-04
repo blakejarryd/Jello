@@ -43,13 +43,13 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
   const handleCreate = async (name, status) => {
     console.log(name)
     console.log(status)
-    length = cards[status].length
+    let len = cards[status].length
     const res = await fetch('/cards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title:name, status:status, rank:length })
+      body: JSON.stringify({ title:name, status:status, rank:len })
     })
     const newCard = await res.json()
     setCards({

@@ -28,9 +28,12 @@ const CreateCard = ({ onFormSubmit, status }) => {
 const Column = ({ cards, name, onFormSubmit, handleEdit, board, editBoard, handleDragEnd, editCardsStatus, deleteColumn }) => {
   const [editing, setEditing] = useState(false)
 
-  cards.sort((a, b) => {
-    return a.rank - b.rank;
-  })
+  if (cards) {
+    cards.sort((a, b) => {
+      return a.rank - b.rank;
+    })
+  }
+ 
 
   const switchEdit = () => {
     setEditing(!editing)
