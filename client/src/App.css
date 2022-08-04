@@ -11,6 +11,9 @@ div.container {
 
 .horizontal-scroll {
   overflow-x: auto;
+  white-space: nowrap;
+  display:  inline-block;
+  float:  none;
 }
 
 .nav-img {

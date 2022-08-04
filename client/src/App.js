@@ -169,14 +169,14 @@ const App = () => {
   }, [])
 
 
-
+const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} handleLogout={handleLogout}/>
 
   return (
     <div className="App">
       <Routes>
         <Route exact path="/" element={
           <>
-            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }        
+            {navbar}        
             <Home />
             <Register handleRegister={handleAuth} />
           </>
@@ -188,7 +188,7 @@ const App = () => {
         <Route path='/boards' element={
           <>
             <ProtectedRoute authorised={authorised}> 
-              {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+              {navbar} 
               <h1>Board Home Page</h1>
               <h3>Select a board</h3>
             </ProtectedRoute>  
@@ -198,7 +198,7 @@ const App = () => {
           <>
             <ProtectedRoute authorised={authorised}> 
               <DndProvider backend={HTML5Backend}>
-                {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+                {navbar}
                 {board && <Board 
                  board={board} 
                  setBoard={setBoard} 
