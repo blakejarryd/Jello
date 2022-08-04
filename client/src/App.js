@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom'
 
 import './App.css';
 
@@ -18,7 +18,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 const App = () => {
   const [authorised, setAuthorised] = useState(null)
   const [boards, setBoards] = useState(null)
-  const [board, setBoard] = useState('')
+  const [board, setBoard] = useState(null)
+
 
   const navigate = useNavigate()
 
@@ -169,6 +170,7 @@ const App = () => {
 
 
 
+
   return (
     <div className="App">
       <Routes>
@@ -183,26 +185,33 @@ const App = () => {
         <Route path="/login" element={<Login handleLogin={handleAuth} />} />
         <Route path="/register" element={<Register handleRegister={handleAuth} />} />
         <Route path="/logout" element={<Logout handleLogout={handleLogout} />} />
-        
         <Route path='/boards' element={
           <>
-            {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
-            <DndProvider backend={HTML5Backend}>
-              <ProtectedRoute authorised={authorised}>  
-                {board && <Board 
-                  board={board} 
-                  setBoard={setBoard} 
-                  editBoard={editBoard} 
-                  editCardsStatus={editCardsStatus} 
-                  createColumn={createColumn}
-                  deleteColumn={deleteColumn}
-                  updateBoardOrder={updateBoardOrder}
-                  /> }
-              </ProtectedRoute>
-            </DndProvider>
+            <ProtectedRoute authorised={authorised}> 
+              {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+              <h1>Board Home Page</h1>
+              <h3>Select a board</h3>
+            </ProtectedRoute>  
           </>
         } />
-
+        <Route path='/boards/:boardID' element={
+          <>
+            <ProtectedRoute authorised={authorised}> 
+              <DndProvider backend={HTML5Backend}>
+                {boards && <NavBar boards={boards} setBoard={setBoard} createBoard={createBoard} authorised={authorised} /> }
+                {board && <Board 
+                 board={board} 
+                 setBoard={setBoard} 
+                 editBoard={editBoard} 
+                 editCardsStatus={editCardsStatus} 
+                 createColumn={createColumn}
+                 deleteColumn={deleteColumn}
+                 updateBoardOrder={updateBoardOrder}
+                 /> }
+               </DndProvider>
+             </ProtectedRoute>
+           </>
+        } />
         <Route path='/:id' element={<CardDetail handleDelete={handleDelete} handleEdit={handleEdit}/>} />
       </Routes>
     </div>

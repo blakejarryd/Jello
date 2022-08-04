@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 
+
 const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, deleteColumn, updateBoardOrder }) => {
   const [cards, setCards] = useState(null)
   const [editing, setEditing] = useState(false)
