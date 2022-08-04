@@ -1,19 +1,28 @@
+import { Link, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom'
 import Image from "react-bootstrap/Image"
 
 const NavBar = ({ boards, setBoard, createBoard, authorised }) => {
+  let { boardID } = useParams()
+
+  useEffect(() => {
+    let selectedBoard = [...boards].filter((e) => e._id === boardID)
+    setBoard(selectedBoard[0])
+  }, [boardID])
+
   const boardDropdown = boards.map((board) => {
-    return <NavDropdown.Item key={board.name} as={Link} to="/boards" onClick={() => setBoard(board)}>{board.name}</NavDropdown.Item>
+    let id = board._id
+    return <NavDropdown.Item key={board.name} as={Link} to={"/boards/" + id}>{board.name}</NavDropdown.Item>
   })
 
   return (
     <Navbar className="colour-nav">
     <Container>
-      <img className="nav-img" src="jello.png" />
+      <img className="nav-img" src="/jello.png" />
       <Navbar.Brand as={Link} to="/" >Jello</Navbar.Brand>
       <Nav className="me-auto">
       
