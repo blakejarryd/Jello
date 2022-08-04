@@ -9,14 +9,19 @@ div.container {
   padding-bottom: 10px;
 }
 
-.horizontal-scroll {
-  overflow-x: auto;
-  display: flex
+.whole-board {
+  padding-left: 60px;
 }
 
-/*.horizontal-stacking {
-  ;
-}*/
+.horizontal-scroll {
+  overflow-x: auto;
+  display: flex;
+  padding: 10px;
+}
+
+.stacks {
+  padding: 10px;
+}
 
 .nav-img {
   padding: 10px;
@@ -27,12 +32,23 @@ div.container {
   background-color: #DFC9EA;
 }
 
+.trash {
+  max-height: 35px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #8696D5;;
+  border: none
+}
+
 .edit-button {
   position: absolute;
   top: 0;
   right: 0;
   width: 35px;
   height: 35px;
+  margin: 10px;
+  background-color: #8696D5;
+  border: none;
 }
 
 .add-button {
@@ -40,12 +56,23 @@ div.container {
   right: 0;
   width: 35px;
   height: 35px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.logout-btn {
+  background-color: #CBA7DC;
+  border: 2px solid;
+  border-color: #BA8AD0;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px #CBA7DC;
 }
 
 .boardtitle {
   display:inline-block;
   color: #253237; 
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 .boardtitle:hover {
@@ -83,7 +110,6 @@ div.container {
   color: #1B4971;
 }
 
-
 .card {
   margin: 5px;
   padding: 10px;
@@ -92,11 +118,6 @@ div.container {
   min-height: 75px;
   display: flex;
   justify-content: center;
-}
-
-.edit-button {
-  background-color: #8696D5;
-  border: none;
 }
 
 .card-name a {
@@ -113,9 +134,4 @@ div.container {
   border: none;
 }
 
-.trash {
-  max-height: 35px;
-  margin-right: 5px;
-  background-color: #8696D5;;
-  border: none
-}
+

@@ -126,11 +126,9 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
       return;
     }
     if (!result) {
-      console.log('fuck', result)
       return;
     }
     if (result.destination.index === result.source.index && result.destination.droppableId === result.source.droppableId) {
-      console.log('fuck', result)
       return;
     }
     const start = result.source.droppableId
@@ -157,14 +155,13 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
 
   }
 
-
   useEffect(() => {
     getCards()
   }, [board])
 
   const columnsList = board.columns.map((column) => {
     return (cards && 
-      <div className="horizontal-stacking"><Column 
+      <div className="stacks"><Column 
         key={column}
         name={column} 
         cards={cards[column]} 
@@ -210,7 +207,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
   }
 
   return (
-    <div>
+    <div className="whole-board">
       {!editing && <BoardName key="BoardName"/> }
        {editing && <BoardNameEdit key="BoardNameEdit"/> }
       <div className="horizontal-scroll">
