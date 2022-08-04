@@ -28,10 +28,14 @@ app.use(session({
 }))
 
 app.use(express.json())
+app.use(express.static(__dirname + '/client/build'))
+
 app.use("/users", userController)
 app.use("/boards", boardsController)
 app.use("/cards", cardsController)
-
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/client/build/index.html')
+})
 
 mongoose.connect(dbURL, () => {
   console.log("connected to jello db")

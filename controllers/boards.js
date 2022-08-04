@@ -8,7 +8,7 @@ boardsRouter.get('/', async (req, res) => {
   res.status(200).json(boards)
 })
 
-boardsRouter.get('/:boardID', async (req, res) => {
+boardsRouter.get('boards/:boardID', async (req, res) => {
   const board = await Board.findById(req.params.boardID).exec()
   res.status(200).json(board)
 })

@@ -5,9 +5,9 @@ const mongoose = require('mongoose')
 const Board = require('../models/boards')
 const Card = require('../models/cards')
 const User = require('../models/users')
-const boardData = require('../seed/boardData.json')
-const cardData = require('../seed/cardData.json')
-const userData = require('../seed/userData.json')
+const boardData = require('./boardData.json')
+const cardData = require('./cardData.json')
+const userData = require('./userData.json')
 
 const dbURL = process.env.MONGODB_URL
 console.log(dbURL)
