@@ -89,7 +89,7 @@ const CardDetail = ({ handleDelete, handleEdit }) => {
   }
 
   const getCard = async (id) => {
-    const url = `http://localhost:3000/cards/${id}`
+    const url = `/cards/${id}`
     const res = await fetch(url)
     const cardData = await res.json()
     setCard(cardData)
