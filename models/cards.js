@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const cardSchema = mongoose.Schema(
   {
@@ -6,9 +6,9 @@ const cardSchema = mongoose.Schema(
     description: String,
     status: String,
     rank: Number,
-    },
+  },
   { timestamps: true }
-)
-const Card = mongoose.model('Card', cardSchema)
+);
+const Card = mongoose.model('Card', cardSchema);
 
-module.exports = Card
+module.exports = Card;

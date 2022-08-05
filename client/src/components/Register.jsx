@@ -1,34 +1,32 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-
-
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const Register = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [fields, setFields] = useState({ username: '', password: '' })
+  const [fields, setFields] = useState({ username: '', password: '' });
 
-  const handleChange = (event) => { 
+  const handleChange = (event) => {
     setFields({
       ...fields,
-      [event.target.name]: event.target.value
-    })
-  }
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    const res = await fetch("/users/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json"},
-      body: JSON.stringify(fields)
-    })
-    const data = await res.json()
-    navigate("/login")
-    console.log(data)
-  }
-  
+    event.preventDefault();
+    const res = await fetch('/users/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(fields),
+    });
+    const data = await res.json();
+    navigate('/login');
+    console.log(data);
+  };
+
   return (
     <div className="container register">
       <Form onSubmit={handleSubmit}>
@@ -54,12 +52,20 @@ const Register = (props) => {
             id="password"
             className="form-text"
           />
-        </Form.Group><br/>
-        <Button type="submit" variant="light">Register</Button>
-        <p>Already have an account? <Link to="/login" className="link-text">Login here</Link></p>
+        </Form.Group>
+        <br />
+        <Button type="submit" variant="light">
+          Register
+        </Button>
+        <p>
+          Already have an account?{' '}
+          <Link to="/login" className="link-text">
+            Login here
+          </Link>
+        </p>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
