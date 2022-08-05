@@ -123,6 +123,10 @@ div.container {
   width: 300px;
 }
 
+.cards {
+  min-height: 20px;
+}
+
 .columntitle {
   display:inline-block;
   color: #253237; 

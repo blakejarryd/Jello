@@ -140,6 +140,9 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
       const [reorderedItem] = items.splice(result.source.index, 1)
       items.splice(result.destination.index, 0, reorderedItem)
       newCards[start] = items
+      for (let i=0; i < newCards[start].length; i++) { 
+        newCards[start][i].rank = i
+      }
       handleEditRank(result.draggableId, result.destination.index, end, result.source.index)
     } else if (start !== end) {
       const oldItems = Array.from(cards[result.source.droppableId])
