@@ -1,6 +1,6 @@
 # Jello
 ### Something you have definitely never seen before
-https://jellokanbanboard.herokuapp.com/
+Checkout our app [on Heroku.](https://jellokanbanboard.herokuapp.com/)
 
 <details>
   <summary>Table of Contents</summary>
@@ -10,7 +10,8 @@ https://jellokanbanboard.herokuapp.com/
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
-    </li>
+    </li>![jello1](https://user-images.githubusercontent.com/49797558/183023277-ff6a9234-862f-473e-97ae-212725907a21.gif)
+
     <li><a href="#wireframe">Wireframe</a></li>
     <li><a href="#blockers">Blockers</a></li>
     <li><a href="#future-features">Future Features</a></li>
@@ -22,7 +23,6 @@ https://jellokanbanboard.herokuapp.com/
 ## About Our Project
 ### Jello is a ToDo list, crossed with a  Kanban board
 If your team is wobbling when managing their projects, use Jello to crystallise their vision. Jello is the pectin that will help your team shape their project, or to manage your shopping list. Jello is here to help you get a jiggle on.
-
 
 ## Built With
 <p>
@@ -44,6 +44,9 @@ If your team is wobbling when managing their projects, use Jello to crystallise 
   <img width=45% alt="boards website mockup"src="https://imgur.com/cdLbNif.png"/>
   <img width=45% alt="cards on boards mockup"src="https://imgur.com/zYWOW9X.png"/>
 </p>
+
+## In Action
+![jello1](https://user-images.githubusercontent.com/49797558/183023326-c3ffe087-26f9-4770-9f62-14bd849e28b7.gif)
 
 ## Blockers
 We all had some blockers on the way that stopped us working at full pace.
