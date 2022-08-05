@@ -11,9 +11,12 @@ import Board from './components/Board'
 import CardDetail from './components/CardDetails';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/ProtectedRoute'
+import BoardHome from './components/BoardHome';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+
+
 
 const App = () => {
   const [authorised, setAuthorised] = useState(null)
@@ -84,6 +87,7 @@ const App = () => {
     const newBoard = await res.json()
     setBoard(newBoard)
     setBoards([...boards, newBoard])
+    navigate(`/boards/${newBoard._id}`)
   }
 
   const editBoard = async (board) => {
@@ -201,8 +205,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
           <>
             <ProtectedRoute authorised={authorised}> 
               {navbar} 
-              <h1>Board Home Page</h1>
-              <h3>Select a board</h3>
+              {boards && <BoardHome boards={boards} />}
             </ProtectedRoute>  
           </>
         } />
