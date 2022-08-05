@@ -23,8 +23,8 @@ const NavBar = ({ boards, setBoard, createBoard, authorised, handleLogout}) => {
   return (
     <Navbar className="colour-nav">
     <Container>
-      <img className="nav-img" src="/jello.png" />
-      <Navbar.Brand as={Link} to="/" >Jello</Navbar.Brand>
+      
+      <Navbar.Brand as={Link} to="/" ><img className="nav-img" src="/jello.png" />Jello</Navbar.Brand>
       <Nav className="me-auto">
       
       <NavDropdown title="Boards" id="basic-nav-dropdown">
