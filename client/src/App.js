@@ -232,7 +232,7 @@ const navbar = boards && <NavBar boards={boards} setBoard={setBoard} createBoard
         <Route path='/boards/:boardID/:id' element={
           <ProtectedRoute authorised={authorised}> 
             {navbar}
-            {boards && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
+            {board && <CardDetail handleDelete={handleDelete} handleEdit={handleEdit} board={board}/>}
           </ProtectedRoute>
         } />
 
