@@ -214,7 +214,7 @@ const Board = ({ board, setBoard, editBoard, editCardsStatus, createColumn, dele
       <DragDropContext onDragEnd={handleDragEnd}>
         {columnsList}
         <div className="horizontal-stacking">
-          <Button className="new-column" onClick={createColumn}>New Column</Button>
+          <Button className="new-column-btn" onClick={createColumn}>New Column</Button>
         </div>
       </DragDropContext>
       </div>

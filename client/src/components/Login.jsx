@@ -52,7 +52,7 @@ const Login = (props) => {
             className="form-text"
           />
         </Form.Group><br/>
-      <Button type="submit" value="Login" variant="light"/>
+      <Button type="submit" value="Login" variant="light">Login</Button>
       <p>No account yet? <Link to="/register" className="link-text">Register here</Link></p>
     </Form>
     </div>
