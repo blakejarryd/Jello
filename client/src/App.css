@@ -104,6 +104,13 @@ div.container {
   cursor: pointer
 }
 
+.boardHomeTitle {
+  display:inline-block;
+  color: #253237; 
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
 .column {
   padding: 10px;
   background-color: #D2D8EF;
@@ -179,5 +186,30 @@ div.container {
   box-shadow: 0 5px 10px #8696D5;
   margin-bottom: 30px;
   max-width: 600px;
+}
+
+.boardHome {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.boardCard {
+  padding: 10px;
+  background-color: #D2D8EF;
+  border: 2px solid darkgray;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px #8696D5;
+  margin-bottom: 30px;
+  color: darkslategray;
+}
+
+a {
+  text-decoration: none;
+}
+
+.boardCard:hover {
+  font-style: italic;
+  background-color: lightgray;
+  cursor: pointer;
 }
 
