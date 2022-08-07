@@ -2,6 +2,10 @@
 ### Something you have definitely never seen before
 Checkout our app [on Heroku.](https://jellokanbanboard.herokuapp.com/)
 
+**Username:** jiggle
+
+**Password:** wobble
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
